@@ -52,7 +52,7 @@ export default function Navbar() {
 
           {/* WhatsApp Button */}
           <a
-            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
+            href={`https://chat.whatsapp.com/K2VgqUgYWlx5nTJY2HP58a?mode=gi_t`}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:flex bg-green-500 hover:bg-green-600 px-4 py-2 rounded-full items-center gap-2 transition-all transform hover:scale-105"
@@ -84,7 +84,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
+              href={`https://chat.whatsapp.com/K2VgqUgYWlx5nTJY2HP58a?mode=gi_t`}
               target="_blank"
               rel="noopener noreferrer"
               className="block py-2 px-4 mt-2 bg-green-500 hover:bg-green-600 rounded-lg text-center"

@@ -142,7 +142,7 @@ export default function VideoSection() {
           </p>
           <div className="text-center mt-4">
             <a
-              href="https://wa.me/1234567890?text=Quiero%20más%20información%20sobre%20el%20video%20de%20trading"
+              href="https://chat.whatsapp.com/K2VgqUgYWlx5nTJY2HP58a?mode=gi_t"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 px-6 py-2 rounded-full transition transform hover:scale-105"

@@ -49,7 +49,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2 text-gray-400 text-sm">
                 <MapPin size={14} />
-                <span>Wall Street, New York</span>
+                <span>El salvador</span>
               </li>
             </ul>
           </div>
@@ -59,7 +59,7 @@ export default function Footer() {
             <h3 className="text-white font-semibold mb-4">Síguenos</h3>
             <div className="flex space-x-4">
               <a
-                href="https://wa.me/1234567890"
+                href="https://chat.whatsapp.com/K2VgqUgYWlx5nTJY2HP58a?mode=gi_t"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gray-800 hover:bg-green-500 p-2 rounded-full transition transform hover:scale-110"
