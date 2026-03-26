@@ -60,8 +60,8 @@ export default function TradingClass() {
   const bonos = [
     {
       icon: Bot,
-      title: "Grupo y Bot de Telegram",
-      desc: "Comunidad exclusiva y alertas.",
+title: "Alertas de Trading en Tiempo Real",
+desc: "Señales precisas directo a tu Telegram."
     },
     {
       icon: ActivitySquare,
@@ -94,7 +94,7 @@ export default function TradingClass() {
             <BadgeDollarSign size={16} className="animate-pulse" />
             <span>🔥 Inscripciones abiertas - Cupos limitados</span>
           </div>
-          <h2 className="animate-in slide-in-from-bottom-5 fade-in duration-700 mb-6 bg-gradient-to-r from-white via-yellow-100 to-white bg-clip-text text-5xl font-black tracking-tight text-transparent md:text-6xl lg:text-7xl">
+          <h1 className="animate-in slide-in-from-bottom-5 fade-in duration-700 mb-6 bg-gradient-to-r from-white via-yellow-100 to-white bg-clip-text text-5xl font-black tracking-tight text-transparent md:text-6xl lg:text-7xl">
             Aprende Trading
             <br />
             <span className="relative inline-block">
@@ -102,7 +102,7 @@ export default function TradingClass() {
                 con Estructura y Lógica
               </span>
             </span>
-          </h2>
+          </h1>
           <p className="animate-in slide-in-from-bottom-5 fade-in delay-100 mx-auto max-w-3xl text-lg leading-relaxed text-gray-300 md:text-xl">
             Tanto si empiezas desde cero como si buscas una estrategia definitiva. Te acompaño paso a paso hasta que seas capaz de analizar y operar el mercado por tu cuenta.
           </p>
@@ -186,16 +186,22 @@ export default function TradingClass() {
             
             <div className="relative z-10 flex flex-col h-full">
               
-              {/* Header Precio */}
+              {/* Header Precio y Duración */}
               <div className="mb-6 text-center border-b border-gray-800 pb-6">
-                <div className="inline-flex items-center gap-1.5 rounded-full bg-yellow-500/10 px-3 py-1 mb-4 text-xs font-bold uppercase tracking-wider text-yellow-400 border border-yellow-500/20">
-                  <Zap size={14} /> Curso Completo
+                <div className="flex flex-wrap items-center justify-center gap-2 mb-4">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-yellow-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-yellow-400 border border-yellow-500/20">
+                    <Zap size={14} /> Curso Completo
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-sky-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-sky-400 border border-sky-500/20">
+                    <Clock3 size={14} /> Duración: 2 Meses
+                  </div>
                 </div>
+                
                 <div className="flex items-center justify-center gap-2">
                   <span className="text-2xl font-bold text-gray-400">$</span>
                   <span className="text-6xl font-black text-white">149<span className="text-3xl text-gray-400">.99</span></span>
                 </div>
-                <p className="text-sm text-gray-400 mt-2">Pago único • Acceso a todo el contenido</p>
+                <p className="text-sm text-gray-400 mt-2">Pago único • 8 semanas de formación intensiva</p>
               </div>
 
               {/* Bonos Adicionales */}
