@@ -15,4 +15,4 @@ export const siteConfig = {
     'mentor de trading',
     'clases online de trading',
   ],
-} as const;
+} ;
