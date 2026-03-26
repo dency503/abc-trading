@@ -1,6 +1,3 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Indicators from './components/Indicators';
@@ -9,30 +6,45 @@ import Gallery from './components/Gallery';
 import VideoSection from './components/VideoSection';
 import Footer from './components/Footer';
 import Comments from './components/Comments';
+import { siteConfig } from './seo';
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Simular carga inicial
-    setTimeout(() => setIsLoading(false), 500);
-  }, []);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="relative">
-          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-yellow-400"></div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-yellow-400 font-bold">ABC</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        name: siteConfig.name,
+        url: siteConfig.url,
+        logo: `${siteConfig.url}${siteConfig.ogImage}`,
+        description: siteConfig.description,
+        areaServed: 'Latinoamerica',
+        address: {
+          '@type': 'PostalAddress',
+          addressCountry: 'SV',
+        },
+      },
+      {
+        '@type': 'Service',
+        serviceType: 'Clases de trading online',
+        provider: {
+          '@type': 'Organization',
+          name: siteConfig.name,
+          url: siteConfig.url,
+        },
+        areaServed: 'Latinoamerica',
+        availableLanguage: 'es',
+        description: siteConfig.description,
+      },
+    ],
+  };
 
   return (
     <main className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <Navbar />
       <Hero />
       <Indicators />

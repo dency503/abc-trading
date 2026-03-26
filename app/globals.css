@@ -1,7 +1,6 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 @theme {
-  /* Colores personalizados */
   --color-gray-900: oklch(0.21 0.006 285.885);
   --color-gray-800: oklch(0.278 0.033 256.848);
   --color-yellow-400: oklch(0.852 0.199 91.936);
@@ -11,9 +10,26 @@
 }
 
 @layer base {
+  :root {
+    --surface-main: #070b11;
+    --surface-card: rgba(16, 20, 28, 0.9);
+    --surface-muted: rgba(255, 255, 255, 0.04);
+    --border-soft: rgba(255, 255, 255, 0.08);
+    --gold-main: #f5c84c;
+    --gold-strong: #f59e0b;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    background-image: linear-gradient(to bottom right, var(--color-gray-900), var(--color-gray-800));
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top, rgba(245, 200, 76, 0.18), transparent 28%),
+      linear-gradient(180deg, #06080d 0%, #0b1017 55%, #070a10 100%);
     color: var(--color-white);
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   }
 }
 
@@ -26,18 +42,24 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
   }
-  
+
   .trading-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   }
-  
+
   .gradient-text {
     background-image: linear-gradient(to right, var(--color-yellow-400), var(--color-orange-500));
     background-clip: text;
     color: transparent;
   }
-  
+
+  .gold-panel {
+    background: linear-gradient(135deg, rgba(245, 200, 76, 0.12), rgba(245, 158, 11, 0.03));
+    border: 1px solid rgba(245, 200, 76, 0.16);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  }
+
   .indicator-value {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -52,24 +74,27 @@
   .animation-delay-100 {
     animation-delay: 100ms;
   }
+
   .animation-delay-200 {
     animation-delay: 200ms;
   }
+
   .animation-delay-300 {
     animation-delay: 300ms;
   }
-  
+
   @keyframes fadeIn {
     from {
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-  
+
   .animate-fade-in {
     animation: fadeIn 0.6s ease-out forwards;
   }

@@ -1,6 +1,6 @@
-'use client';
-
-import { Phone, Mail, MapPin } from 'lucide-react';
+﻿'use client';
+import Image from 'next/image';
+import { Phone, Mail, MapPin, ArrowUpRight, BadgeCheck, HeartHandshake } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -10,101 +10,102 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-black py-12">
+    <footer className="bg-[#040608] pt-16 pb-10">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Logo y descripción */}
-          <div>
-            <div className="text-2xl font-bold gradient-text mb-4 cursor-pointer" onClick={scrollToTop}>
-              ABC-TRADING
+        <div className="mb-10 rounded-[2rem] border border-yellow-500/15 bg-gradient-to-r from-yellow-500/10 via-white/5 to-transparent p-8 md:p-10">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.28em] text-yellow-300">
+                Hablemos claro
+              </p>
+              <h2 className="mb-3 text-3xl font-black text-white md:text-4xl">
+                Comparto desde El Salvador lo que aprendi para ayudarte a empezar mejor
+              </h2>
+              <p className="max-w-2xl text-gray-300">
+                Si quieres conocer mis horarios, el precio o como son las clases, escribeme por WhatsApp y te respondo directamente.
+              </p>
             </div>
-            <p className="text-gray-400 text-sm">
-              Aprende trading desde cero con clases prácticas y acompañamiento continuo hasta que te sientas capaz de operar por tu cuenta.
+            <a
+              href="https://chat.whatsapp.com/K2VgqUgYWlx5nTJY2HP58a?mode=gi_t"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-4 font-semibold text-black transition hover:bg-yellow-300"
+            >
+              Solicitar informacion
+              <ArrowUpRight size={18} />
+            </a>
+          </div>
+        </div>
+
+        <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-4">
+          <div>
+            <div className="mb-4 cursor-pointer" onClick={scrollToTop}>
+<Image
+  src="/logo.png"
+  alt="ABC TRADING"
+  width={300}
+  height={90}
+  className="h-24 w-auto object-contain 
+             drop-shadow-[0_14px_40px_rgba(255,215,0,0.35)]
+             hover:scale-105 transition"
+/>
+</div>
+            <p className="text-sm leading-6 text-gray-400">
+              Comparto clases online de trading desde El Salvador para personas que quieren aprender con una guia clara y cercana.
             </p>
           </div>
-          
-          {/* Enlaces rápidos */}
+
           <div>
-            <h3 className="text-white font-semibold mb-4">Enlaces Rápidos</h3>
+            <h3 className="mb-4 font-semibold text-white">Enlaces rapidos</h3>
             <ul className="space-y-2">
-              <li><a href="#inicio" className="text-gray-400 hover:text-yellow-400 transition text-sm">Inicio</a></li>
-              <li><a href="#indicadores" className="text-gray-400 hover:text-yellow-400 transition text-sm">Indicadores</a></li>
-              <li><a href="#clases" className="text-gray-400 hover:text-yellow-400 transition text-sm">Clases</a></li>
-              <li><a href="#galeria" className="text-gray-400 hover:text-yellow-400 transition text-sm">Galería</a></li>
-              <li><a href="#video" className="text-gray-400 hover:text-yellow-400 transition text-sm">Video</a></li>
+              <li><a href="#inicio" className="text-sm text-gray-400 transition hover:text-yellow-400">Inicio</a></li>
+              <li><a href="#indicadores" className="text-sm text-gray-400 transition hover:text-yellow-400">Indicadores</a></li>
+              <li><a href="#clases" className="text-sm text-gray-400 transition hover:text-yellow-400">Clases</a></li>
+              <li><a href="#galeria" className="text-sm text-gray-400 transition hover:text-yellow-400">Resultados</a></li>
+              <li><a href="#video" className="text-sm text-gray-400 transition hover:text-yellow-400">Video</a></li>
             </ul>
           </div>
-          
-          {/* Contacto */}
+
           <div>
-            <h3 className="text-white font-semibold mb-4">Contacto</h3>
+            <h3 className="mb-4 font-semibold text-white">Contacto</h3>
             <ul className="space-y-2">
-              <li className="flex items-center gap-2 text-gray-400 text-sm">
+              <li className="flex items-center gap-2 text-sm text-gray-400">
                 <Phone size={14} />
                 <span>+1 234 567 890</span>
               </li>
-              <li className="flex items-center gap-2 text-gray-400 text-sm">
+              <li className="flex items-center gap-2 text-sm text-gray-400">
                 <Mail size={14} />
                 <span>info@abc-trading.com</span>
               </li>
-              <li className="flex items-center gap-2 text-gray-400 text-sm">
+              <li className="flex items-center gap-2 text-sm text-gray-400">
                 <MapPin size={14} />
-                <span>El salvador</span>
+                <span>El Salvador</span>
+              </li>
+              <li className="flex items-center gap-2 text-sm text-gray-400">
+                <BadgeCheck size={14} className="text-yellow-400" />
+                <span>Clases online con acompanamiento</span>
               </li>
             </ul>
           </div>
-          
-          {/* Redes Sociales con SVGs personalizados */}
+
           <div>
-            <h3 className="text-white font-semibold mb-4">Síguenos</h3>
-            <div className="flex space-x-4">
-              <a
-                href="https://chat.whatsapp.com/K2VgqUgYWlx5nTJY2HP58a?mode=gi_t"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gray-800 hover:bg-green-500 p-2 rounded-full transition transform hover:scale-110"
-              >
-                <Phone size={20} className="text-white" />
-              </a>
-              <a
-                href="#"
-                className="bg-gray-800 hover:bg-blue-400 p-2 rounded-full transition transform hover:scale-110"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
-                </svg>
-              </a>
-              <a
-                href="#"
-                className="bg-gray-800 hover:bg-pink-600 p-2 rounded-full transition transform hover:scale-110"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                </svg>
-              </a>
-              <a
-                href="#"
-                className="bg-gray-800 hover:bg-blue-600 p-2 rounded-full transition transform hover:scale-110"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                </svg>
-              </a>
+            <h3 className="mb-4 font-semibold text-white">Mi enfoque</h3>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <div className="mb-3 flex items-center gap-2 text-yellow-300">
+                <HeartHandshake size={16} />
+                <span className="text-sm font-semibold">Mas cercano</span>
+              </div>
+              <p className="text-sm leading-6 text-gray-400">
+                No vendo humo. Comparto lo que aprendi, explico con claridad y acompano a quienes quieren empezar con mejor base.
+              </p>
             </div>
           </div>
         </div>
-        
-        {/* Línea divisoria */}
-        <div className="border-t border-gray-800 pt-8">
+
+        <div className="border-t border-white/10 pt-8">
           <div className="text-center">
-            <p className="text-gray-500 text-sm">
-              © {currentYear} ABC-TRADING. Todos los derechos reservados.
-            </p>
-            <p className="text-gray-600 text-xs mt-2">
-              Educando traders desde 2020
-            </p>
+            <p className="text-sm text-gray-500">(c) {currentYear} ABC-TRADING. Todos los derechos reservados.</p>
+            <p className="mt-2 text-xs text-gray-600">Hecho en El Salvador</p>
           </div>
         </div>
       </div>
