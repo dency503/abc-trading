@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 
 export default function Comments() {
   const disqusConfig = {
-    url: 'https://google.com', // luego cambias a tu dominio real
+    url: 'abc-trading-pi.vercel.app', // luego cambias a tu dominio real
     identifier: 'trading-membership',
     title: 'Comentarios sobre la membresía',
     language: 'es',
