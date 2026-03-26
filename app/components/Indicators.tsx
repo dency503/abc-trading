@@ -7,7 +7,8 @@ import {
   ArrowUp, ArrowDown,
   Sparkles, Brain, Gauge, Shield,
   MessageCircle, CheckCircle2, CandlestickChart, Bot, 
-  ShoppingCart, CreditCard, Lock
+  ShoppingCart, CreditCard, Lock,
+  PlayCircle
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -283,120 +284,137 @@ const isPositive = changeValue >= 0;
       <div className="max-w-[1400px] mx-auto">
         
         {/* Sección de presentación del indicador - Venta separada */}
-        <div className="mb-16 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-          
-          {/* Logo del indicador EN GRANDE */}
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-yellow-500/20 via-amber-500/20 to-yellow-500/20 rounded-3xl blur-2xl animate-pulse"></div>
-            <div className="relative bg-gradient-to-br from-[#0f1117] to-[#0a0c10] rounded-3xl border border-yellow-500/30 p-8 shadow-2xl">
-              <div className="flex flex-col items-center text-center">
-                {/* Logo Gigante */}
-                <div className="relative mb-6">
-                  <div className="absolute inset-0 bg-yellow-500 rounded-full blur-3xl opacity-40 animate-pulse"></div>
-                  <div className="relative w-40 h-40 bg-gradient-to-br from-[#1a1f2a] to-[#0f1117] rounded-3xl flex items-center justify-center shadow-2xl border-2 border-yellow-500/50 overflow-hidden">
-                    {!logoError ? (
-                      <Image
-                        width={120}
-                        height={120}
-                        src="/images/price-logistic-7-logo.png"
-                        alt="Price Logistic 7 Logo"
-                        className="w-28 h-28 object-contain"
-                        onError={() => setLogoError(true)}
-                      />
-                    ) : (
-                      <Brain className="text-yellow-500" size={80} />
-                    )}
-                  </div>
-                  <div className="absolute -top-2 -right-2 bg-yellow-500 text-xs font-bold text-black px-2 py-1 rounded-full">
-                    v7.0
-                  </div>
-                </div>
-                
-                <h2 className="text-3xl md:text-4xl font-black text-white mb-3">
-                  Price Logistic 7
-                </h2>
-                <p className="text-yellow-400 text-sm font-semibold mb-4">Indicador Profesional para TradingView</p>
-                
-                {/* Badge de venta separada */}
-                <div className="inline-flex items-center gap-2 rounded-full bg-red-500/20 border border-red-500/30 px-4 py-2 mb-6">
-                  <ShoppingCart size={14} className="text-red-400" />
-                  <span className="text-xs font-semibold text-red-400 uppercase tracking-wide">Venta Separada - No incluido en membresía</span>
-                </div>
-                
-                <p className="text-gray-300 text-lg leading-relaxed max-w-xl mx-auto">
-                  Un indicador diseñado para traders que buscan <span className="text-yellow-400 font-semibold">estructura real</span> en el mercado. 
-                  Detecta pivotes, liquidez y zonas clave con señales visuales claras.
-                </p>
-                
-                <div className="flex gap-3 mt-6">
-                  <div className="flex items-center gap-1 text-emerald-400 text-sm">
-                    <CheckCircle2 size={14} />
-                    <span>Pivotes automáticos</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-emerald-400 text-sm">
-                    <CheckCircle2 size={14} />
-                    <span>Liquidity Grab</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-emerald-400 text-sm">
-                    <CheckCircle2 size={14} />
-                    <span>EMAs integradas</span>
-                  </div>
-                </div>
+    <div className="mb-16 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center max-w-6xl mx-auto px-4">
+      
+      {/* Columna Izquierda: Logo y Descripción del indicador (Mantenido intacto) */}
+      <div className="relative">
+        <div className="absolute -inset-4 bg-gradient-to-r from-yellow-500/20 via-amber-500/20 to-yellow-500/20 rounded-3xl blur-2xl animate-pulse"></div>
+        <div className="relative bg-gradient-to-br from-[#0f1117] to-[#0a0c10] rounded-3xl border border-yellow-500/30 p-8 shadow-2xl">
+          <div className="flex flex-col items-center text-center">
+            {/* Logo Gigante */}
+            <div className="relative mb-6">
+              <div className="absolute inset-0 bg-yellow-500 rounded-full blur-3xl opacity-40 animate-pulse"></div>
+              <div className="relative w-40 h-40 bg-gradient-to-br from-[#1a1f2a] to-[#0f1117] rounded-3xl flex items-center justify-center shadow-2xl border-2 border-yellow-500/50 overflow-hidden">
+                {!logoError ? (
+                  <Image
+                    width={120}
+                    height={120}
+                    src="/images/price-logistic-7-logo.png"
+                    alt="Price Logistic 7 Logo"
+                    className="w-28 h-28 object-contain"
+                    onError={() => setLogoError(true)}
+                  />
+                ) : (
+                  <Brain className="text-yellow-500" size={80} />
+                )}
               </div>
+              
             </div>
-          </div>
-          
-          {/* Panel de información de compra */}
-          <div className="relative overflow-hidden rounded-3xl border border-yellow-500/20 bg-gradient-to-br from-[#0f1117] to-[#0a0c10] p-6 shadow-2xl md:p-8">
-            <div className="absolute top-0 right-0 h-48 w-48 rounded-full bg-yellow-500/10 blur-3xl" />
-            <div className="relative z-10">
-              <div className="mb-5 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-500/15 text-yellow-400">
-                  <Lock size={22} />
-                </div>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-yellow-300">
-                    Licencia de por vida
-                  </p>
-                  <h3 className="mt-1 text-2xl font-bold text-white">Adquiere el indicador</h3>
-                </div>
+            
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-3">
+              Price Logistic 7
+            </h2>
+            <p className="text-yellow-400 text-sm font-semibold mb-4">Indicador Profesional para TradingView</p>
+            
+            {/* Badge de venta separada */}
+            <div className="inline-flex items-center gap-2 rounded-full bg-red-500/20 border border-red-500/30 px-4 py-2 mb-6">
+              <ShoppingCart size={14} className="text-red-400" />
+              <span className="text-xs font-semibold text-red-400 uppercase tracking-wide">Venta Separada - No incluido en membresía</span>
+            </div>
+            
+            <p className="text-gray-300 text-lg leading-relaxed max-w-xl mx-auto mb-6">
+              Un indicador diseñado para traders que buscan <span className="text-yellow-400 font-semibold">estructura real</span> en el mercado. 
+              Detecta pivotes, liquidez y zonas clave con señales visuales claras.
+            </p>
+            
+            <div className="flex flex-wrap justify-center gap-4 mt-2">
+              <div className="flex items-center gap-1.5 text-emerald-400 text-sm bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20">
+                <CheckCircle2 size={16} />
+                <span>Pivotes automáticos</span>
               </div>
-
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-yellow-500/20 bg-yellow-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-yellow-300">
-                <CreditCard size={12} />
-                Pago único - Acceso inmediato
+              <div className="flex items-center gap-1.5 text-emerald-400 text-sm bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20">
+                <CheckCircle2 size={16} />
+                <span>Liquidity Grab</span>
               </div>
-
-              <div className="space-y-4 mb-6">
-                {offerHighlights.map((item) => (
-                  <div key={item} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-4">
-                    <CheckCircle2 size={18} className="mt-0.5 text-emerald-400 flex-shrink-0" />
-                    <p className="text-sm leading-relaxed text-gray-300">{item}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="bg-gradient-to-r from-yellow-500/10 to-amber-500/10 rounded-2xl p-5 border border-yellow-500/20 mb-6">
-                <p className="text-center text-sm text-gray-300 mb-2">Inversión única</p>
-                <p className="text-center text-4xl font-bold text-white mb-1">Cotiza ahora</p>
-                <p className="text-center text-xs text-gray-500">Acceso de por vida </p>
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <button
-                  onClick={openWhatsApp}
-                  className="w-full rounded-2xl bg-gradient-to-r from-yellow-400 to-amber-500 px-6 py-4 font-bold text-black transition hover:scale-[1.02] hover:shadow-[0_18px_40px_rgba(245,200,76,0.24)] flex items-center justify-center gap-2"
-                >
-                  <ShoppingCart size={18} />
-                  Comprar Indicador Ahora
-                </button>
-                <p className="text-center text-xs text-gray-500">
-                  ✅ Soporte incluido | ✅ Instalación guiada | ✅ Actualizaciones gratuitas
-                </p>
+              <div className="flex items-center gap-1.5 text-emerald-400 text-sm bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20">
+                <CheckCircle2 size={16} />
+                <span>EMAs integradas</span>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Columna Derecha: Panel de Precios NUEVO */}
+      <div className="relative overflow-hidden rounded-3xl border border-yellow-500/20 bg-gradient-to-br from-[#0f1117] to-[#0a0c10] p-6 shadow-2xl md:p-8">
+        <div className="absolute top-0 right-0 h-48 w-48 rounded-full bg-yellow-500/10 blur-3xl" />
+        <div className="relative z-10">
+          
+          <div className="mb-6 flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-500/15 text-yellow-400 shadow-[0_0_15px_rgba(234,179,8,0.2)]">
+              <Lock size={22} />
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-yellow-300">
+                Planes de Acceso
+              </p>
+              <h3 className="mt-1 text-2xl font-bold text-white">Adquiere el indicador</h3>
+            </div>
+          </div>
+
+          {/* Lista de Precios */}
+          <div className="space-y-3 mb-6">
+            <div className="flex justify-between items-center p-3.5 rounded-xl border border-gray-800 bg-white/5 hover:border-gray-600 transition-colors">
+              <span className="text-gray-300 font-medium">1 Mes</span>
+              <span className="text-white font-bold text-lg">$39.99</span>
+            </div>
+            
+            <div className="flex justify-between items-center p-3.5 rounded-xl border border-gray-800 bg-white/5 hover:border-gray-600 transition-colors">
+              <span className="text-gray-300 font-medium">3 Meses</span>
+              <span className="text-white font-bold text-lg">$99.99</span>
+            </div>
+            
+            <div className="flex justify-between items-center p-3.5 rounded-xl border border-gray-800 bg-white/5 hover:border-gray-600 transition-colors">
+              <span className="text-gray-300 font-medium">1 Año</span>
+              <span className="text-white font-bold text-lg">$199.99</span>
+            </div>
+            
+            {/* Plan de por vida destacado */}
+            <div className="flex justify-between items-center p-4 rounded-xl border-2 border-yellow-500/50 bg-yellow-500/10 relative overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.1)]">
+              <div className="absolute top-0 right-0 bg-yellow-500 text-black text-[10px] font-bold px-3 py-0.5 rounded-bl-lg">
+                MEJOR INVERSIÓN
+              </div>
+              <span className="text-yellow-400 font-bold mt-1">De por vida</span>
+              <span className="text-yellow-400 font-black text-2xl mt-1">$499.99</span>
+            </div>
+          </div>
+
+          {/* Bono: 2 Videos de uso */}
+          <div className="flex items-start gap-3 rounded-xl border border-yellow-500/20 bg-gradient-to-r from-yellow-500/10 to-transparent p-4 mb-8">
+            <PlayCircle size={24} className="text-yellow-400 flex-shrink-0 mt-0.5" />
+            <div>
+              <h4 className="text-white font-bold text-sm mb-1">Bono Exclusivo Incluido</h4>
+              <p className="text-xs leading-relaxed text-gray-400">
+                Tu compra incluye <strong className="text-gray-200">2 videos tutoriales</strong> detallados donde aprenderás la configuración exacta y cómo operar con las señales del indicador.
+              </p>
+            </div>
+          </div>
+
+          {/* Botón de compra */}
+          <div className="flex flex-col gap-3">
+            <button
+              onClick={openWhatsApp}
+              className="w-full rounded-2xl bg-gradient-to-r from-yellow-400 to-amber-500 px-6 py-4 font-bold text-black transition-all hover:scale-[1.02] hover:shadow-[0_15px_30px_rgba(245,200,76,0.25)] flex items-center justify-center gap-2"
+            >
+              <CreditCard size={18} />
+              Solicitar Acceso Ahora
+            </button>
+            
+          </div>
+          
+        </div>
+      </div>
+    </div>
         
         {/* Preview del indicador en acción */}
         <div className="mb-8">
