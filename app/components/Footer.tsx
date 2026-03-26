@@ -42,7 +42,7 @@ export default function Footer() {
             <div className="mb-4 cursor-pointer" onClick={scrollToTop}>
 <Image
   src="/logo.png"
-  alt="ABC TRADING"
+  alt="ABC del Trading 503"
   width={300}
   height={90}
   className="h-24 w-auto object-contain 

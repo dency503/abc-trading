@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: 'ABC Trading',
-  title: 'ABC Trading | Clases de trading online desde cero',
+  name: 'ABC del Trading 503',
+  title: 'ABC del Trading 503 | Clases de trading online desde cero',
   description:
     'Clases de trading online desde cero con acompanamiento real, sesiones en vivo y explicaciones claras desde El Salvador para toda Latinoamerica.',
   url: 'https://abc-trading-pi.vercel.app',

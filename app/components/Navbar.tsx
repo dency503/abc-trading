@@ -39,13 +39,13 @@ export default function Navbar() {
           <a href="#inicio" className="flex items-center gap-3">
             <Image
               src="/logo.png"
-              alt="ABC TRADING"
+              alt="ABC del Trading 503"
               width={44}
               height={44}
               className="h-11 w-11 rounded-xl object-contain ring-1 ring-white/10"
             />
             <div>
-              <div className="text-lg font-bold tracking-[0.22em] text-white">ABC TRADING</div>
+              <div className="text-lg font-bold tracking-[0.22em] text-white">ABC DEL TRADING 503</div>
               <div className="hidden sm:flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-gray-400">
                 <MapPin size={12} className="text-yellow-400" />
                 Desde El Salvador para latinoamerica

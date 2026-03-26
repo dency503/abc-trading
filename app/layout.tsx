@@ -25,7 +25,7 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 512,
         height: 512,
-        alt: 'Logo de ABC Trading',
+        alt: 'Logo de ABC del Trading 503',
       },
     ],
   },

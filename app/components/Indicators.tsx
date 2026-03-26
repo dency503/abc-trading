@@ -2,10 +2,12 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { 
-  Target, Zap, ChevronUp, ChevronDown, Activity, Maximize2, 
+  Target, Activity, 
   Eye, EyeOff, TrendingUp, TrendingDown, DollarSign, 
-  BarChart3, Settings, Info, X, ArrowUp, ArrowDown,
-  Sparkles, Brain, Gauge, Shield, AlertCircle, Image as ImageIcon
+  ArrowUp, ArrowDown,
+  Sparkles, Brain, Gauge, Shield,
+  MessageCircle, CheckCircle2, CandlestickChart, Bot, 
+  ShoppingCart, CreditCard, Lock
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -24,6 +26,17 @@ interface Signal {
   type: 'BUY' | 'SELL';
   reason: string;
   strength?: 'strong' | 'medium' | 'weak';
+}
+
+interface Stats {
+  currentPrice: number;
+  change: string;
+  totalSignals: number;
+  buySignals: number;
+  sellSignals: number;
+  high24h: number;
+  low24h: number;
+  strongSignals: number;
 }
 
 // Colores exactos de TradingView
@@ -171,19 +184,27 @@ const calculateStats = (candles: Candle[], signals: Signal[]) => {
 };
 
 export default function PriceLogistic7Dashboard() {
+  
   const [candles, setCandles] = useState<Candle[]>([]);
   const [signals, setSignals] = useState<Signal[]>([]);
   const [emaFast, setEmaFast] = useState<number[]>([]);
   const [emaSlow, setEmaSlow] = useState<number[]>([]);
-  const [stats, setStats] = useState<any>(null);
+  const [stats, setStats] = useState<Stats | null>(null);
   const [hoveredCandle, setHoveredCandle] = useState<number | null>(null);
   const [showSignals, setShowSignals] = useState(true);
   const [showEMAs, setShowEMAs] = useState(true);
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const [activeTimeframe, setActiveTimeframe] = useState('1H');
   const [logoError, setLogoError] = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+const changeValue = stats?.change ? parseFloat(stats.change) : 0;
+const isPositive = changeValue >= 0;
+  const openWhatsApp = () => {
+    window.open(
+      'https://chat.whatsapp.com/K2VgqUgYWlx5nTJY2HP58a?mode=gi_t',
+      '_blank'
+    );
+  };
 
   useEffect(() => {
     const initializeData = () => {
@@ -215,6 +236,29 @@ export default function PriceLogistic7Dashboard() {
 
   const currentPrice = candles[candles.length - 1].close;
   const isUp = currentPrice >= candles[candles.length - 2]?.close;
+  const offerHighlights = [
+    'Detección automática de pivotes y zonas de liquidez en tiempo real.',
+    'Señales visuales claras de posibles entradas y salidas.',
+    'EMAs personalizables para confirmar tendencia.',
+    'Ideal para traders que buscan estructura y disciplina.',
+  ];
+  const offerCards = [
+    {
+      icon: CandlestickChart,
+      title: 'Detección de Pivotes',
+      description: 'Identifica techos y fondos locales con precisión milimétrica.',
+    },
+    {
+      icon: Bot,
+      title: 'Liquidity Grab',
+      description: 'Detecta cazadores de liquidez antes de que muevan el mercado.',
+    },
+    {
+      icon: Shield,
+      title: 'Soporte EMA',
+      description: 'Confirma las señales con medias móviles de 12 y 26 periodos.',
+    },
+  ];
   
   const graphHeight = 500;
   const graphWidth = 1100;
@@ -235,158 +279,230 @@ export default function PriceLogistic7Dashboard() {
   const getX = (index: number) => (index * (graphWidth / candles.length)) + (graphWidth / candles.length / 2);
 
   return (
-    <section id="indicadores" className="bg-gradient-to-br from-[#0f1117] to-[#131722] py-8 px-4 min-h-screen">
+    <section id="indicadores" className="bg-gradient-to-br from-[#0f1117] via-[#11151f] to-[#131722] py-20 px-4">
       <div className="max-w-[1400px] mx-auto">
         
-        {/* Header mejorado con logo del indicador */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-6">
-          <div className="flex items-center gap-4">
-            {/* Logo del indicador */}
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-2xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative w-16 h-16 bg-gradient-to-br from-[#1a1f2a] to-[#0f1117] rounded-2xl flex items-center justify-center shadow-2xl border border-yellow-500/30 overflow-hidden">
-                {!logoError ? (
-                  <Image
-  width={60}
-  height={60}
-  src="/images/price-logistic-7-logo.png"
-  alt="Price Logistic 7 Logo"
-  className="w-12 h-12 object-contain bg-transparent"
-  onError={() => setLogoError(true)}
-/>
-                ) : (
-                  <div className="text-center">
-                    <Brain className="text-yellow-500" size={32} />
+        {/* Sección de presentación del indicador - Venta separada */}
+        <div className="mb-16 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+          
+          {/* Logo del indicador EN GRANDE */}
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gradient-to-r from-yellow-500/20 via-amber-500/20 to-yellow-500/20 rounded-3xl blur-2xl animate-pulse"></div>
+            <div className="relative bg-gradient-to-br from-[#0f1117] to-[#0a0c10] rounded-3xl border border-yellow-500/30 p-8 shadow-2xl">
+              <div className="flex flex-col items-center text-center">
+                {/* Logo Gigante */}
+                <div className="relative mb-6">
+                  <div className="absolute inset-0 bg-yellow-500 rounded-full blur-3xl opacity-40 animate-pulse"></div>
+                  <div className="relative w-40 h-40 bg-gradient-to-br from-[#1a1f2a] to-[#0f1117] rounded-3xl flex items-center justify-center shadow-2xl border-2 border-yellow-500/50 overflow-hidden">
+                    {!logoError ? (
+                      <Image
+                        width={120}
+                        height={120}
+                        src="/images/price-logistic-7-logo.png"
+                        alt="Price Logistic 7 Logo"
+                        className="w-28 h-28 object-contain"
+                        onError={() => setLogoError(true)}
+                      />
+                    ) : (
+                      <Brain className="text-yellow-500" size={80} />
+                    )}
                   </div>
-                )}
-              </div>
-              {/* Badge de versión */}
-              <div className="absolute -top-1 -right-1 bg-yellow-500 text-[10px] font-bold text-black px-1.5 py-0.5 rounded-full">
-                v7
+                  <div className="absolute -top-2 -right-2 bg-yellow-500 text-xs font-bold text-black px-2 py-1 rounded-full">
+                    v7.0
+                  </div>
+                </div>
+                
+                <h2 className="text-3xl md:text-4xl font-black text-white mb-3">
+                  Price Logistic 7
+                </h2>
+                <p className="text-yellow-400 text-sm font-semibold mb-4">Indicador Profesional para TradingView</p>
+                
+                {/* Badge de venta separada */}
+                <div className="inline-flex items-center gap-2 rounded-full bg-red-500/20 border border-red-500/30 px-4 py-2 mb-6">
+                  <ShoppingCart size={14} className="text-red-400" />
+                  <span className="text-xs font-semibold text-red-400 uppercase tracking-wide">Venta Separada - No incluido en membresía</span>
+                </div>
+                
+                <p className="text-gray-300 text-lg leading-relaxed max-w-xl mx-auto">
+                  Un indicador diseñado para traders que buscan <span className="text-yellow-400 font-semibold">estructura real</span> en el mercado. 
+                  Detecta pivotes, liquidez y zonas clave con señales visuales claras.
+                </p>
+                
+                <div className="flex gap-3 mt-6">
+                  <div className="flex items-center gap-1 text-emerald-400 text-sm">
+                    <CheckCircle2 size={14} />
+                    <span>Pivotes automáticos</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-emerald-400 text-sm">
+                    <CheckCircle2 size={14} />
+                    <span>Liquidity Grab</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-emerald-400 text-sm">
+                    <CheckCircle2 size={14} />
+                    <span>EMAs integradas</span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div>
-              <div className="flex items-center gap-3">
-                <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-                  BTC/USDT
-                  <span className="text-xs font-mono text-gray-400">• Perpetual</span>
-                </h2>
-                <span className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-yellow-500/20 to-amber-500/20 text-yellow-500 text-sm font-bold flex items-center gap-2 border border-yellow-500/30">
-                  <Sparkles size={14} />
-                  PRICELOGISTIC 7 ENGINE
-                </span>
+          </div>
+          
+          {/* Panel de información de compra */}
+          <div className="relative overflow-hidden rounded-3xl border border-yellow-500/20 bg-gradient-to-br from-[#0f1117] to-[#0a0c10] p-6 shadow-2xl md:p-8">
+            <div className="absolute top-0 right-0 h-48 w-48 rounded-full bg-yellow-500/10 blur-3xl" />
+            <div className="relative z-10">
+              <div className="mb-5 flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-500/15 text-yellow-400">
+                  <Lock size={22} />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-yellow-300">
+                    Licencia de por vida
+                  </p>
+                  <h3 className="mt-1 text-2xl font-bold text-white">Adquiere el indicador</h3>
+                </div>
               </div>
-              <p className="text-gray-500 text-xs mt-1 flex items-center gap-2">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                Sistema avanzado de detección de pivotes y liquidez en tiempo real
-              </p>
+
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-yellow-500/20 bg-yellow-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-yellow-300">
+                <CreditCard size={12} />
+                Pago único - Acceso inmediato
+              </div>
+
+              <div className="space-y-4 mb-6">
+                {offerHighlights.map((item) => (
+                  <div key={item} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-4">
+                    <CheckCircle2 size={18} className="mt-0.5 text-emerald-400 flex-shrink-0" />
+                    <p className="text-sm leading-relaxed text-gray-300">{item}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-gradient-to-r from-yellow-500/10 to-amber-500/10 rounded-2xl p-5 border border-yellow-500/20 mb-6">
+                <p className="text-center text-sm text-gray-300 mb-2">Inversión única</p>
+                <p className="text-center text-4xl font-bold text-white mb-1">Cotiza ahora</p>
+                <p className="text-center text-xs text-gray-500">Acceso de por vida </p>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={openWhatsApp}
+                  className="w-full rounded-2xl bg-gradient-to-r from-yellow-400 to-amber-500 px-6 py-4 font-bold text-black transition hover:scale-[1.02] hover:shadow-[0_18px_40px_rgba(245,200,76,0.24)] flex items-center justify-center gap-2"
+                >
+                  <ShoppingCart size={18} />
+                  Comprar Indicador Ahora
+                </button>
+                <p className="text-center text-xs text-gray-500">
+                  ✅ Soporte incluido | ✅ Instalación guiada | ✅ Actualizaciones gratuitas
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Preview del indicador en acción */}
+        <div className="mb-8">
+          <div className="text-center mb-6">
+            <h3 className="text-2xl font-bold text-white">Cómo funciona en tiempo real</h3>
+            <p className="text-gray-400 text-sm mt-2">Preview interactivo del indicador ejecutándose en BTC/USDT</p>
+          </div>
+        </div>
+        
+        {/* Header con logo pequeño */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-4 gap-4">
+          <div className="flex items-center gap-3">
+            {!logoError ? (
+              <Image
+                width={32}
+                height={32}
+                src="/images/price-logistic-7-logo.png"
+                alt="PL7"
+                className="w-8 h-8 object-contain"
+                onError={() => setLogoError(true)}
+              />
+            ) : (
+              <Brain size={24} className="text-yellow-500" />
+            )}
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="text-xl font-bold text-white">BTC/USDT</h2>
+                <span className="px-2 py-0.5 rounded-md bg-yellow-500/20 text-yellow-400 text-xs font-bold">PL7 ACTIVE</span>
+              </div>
             </div>
           </div>
           
           <div className="flex gap-4">
-            <div className="bg-gradient-to-br from-[#0f1117] to-[#0b0d12] rounded-xl px-5 py-3 border border-[#2a2e39] hover:border-yellow-500/30 transition-all">
-              <p className="text-gray-400 text-xs mb-1 flex items-center gap-1">
-                <DollarSign size={12} />
-                Precio BTC
-              </p>
-              <div className={`text-2xl font-bold font-mono tracking-tight ${isUp ? 'text-[#26a69a]' : 'text-[#ef5350]'}`}>
+            <div className="bg-[#0f1117] rounded-xl px-4 py-2 border border-[#2a2e39]">
+              <p className="text-gray-400 text-xs">Precio BTC</p>
+              <div className={`text-xl font-bold font-mono ${isUp ? 'text-[#26a69a]' : 'text-[#ef5350]'}`}>
                 ${currentPrice.toLocaleString('en-US', { minimumFractionDigits: 2 })}
               </div>
-              <div className={`flex items-center gap-1 text-sm mt-1 ${parseFloat(stats?.change) >= 0 ? 'text-[#26a69a]' : 'text-[#ef5350]'}`}>
-                {parseFloat(stats?.change) >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
-                {parseFloat(stats?.change) >= 0 ? '+' : ''}{stats?.change}%
-              </div>
             </div>
-            <div className="bg-gradient-to-br from-[#0f1117] to-[#0b0d12] rounded-xl px-5 py-3 border border-[#2a2e39]">
-              <p className="text-gray-400 text-xs mb-1">Rango 24h</p>
-              <p className="text-white font-mono text-sm">${stats?.low24h?.toLocaleString()}</p>
-              <p className="text-white font-mono text-xs">- ${stats?.high24h?.toLocaleString()}</p>
+            <div className="bg-[#0f1117] rounded-xl px-4 py-2 border border-[#2a2e39]">
+              <p className="text-gray-400 text-xs">24h Cambio</p>
+              <div className={`text-lg font-bold ${isPositive ? 'text-[#26a69a]' : 'text-[#ef5350]'}`}>
+  {isPositive ? '+' : ''}{stats?.change || '0'}%
+</div>
             </div>
           </div>
         </div>
 
-        {/* Toolbar mejorado con info del indicador */}
-        <div className="bg-gradient-to-r from-[#0f1117] to-[#0b0d12] rounded-t-xl border border-[#2a2e39] px-5 py-3 flex flex-wrap justify-between items-center gap-3">
+        {/* Toolbar */}
+        <div className="bg-[#0f1117] rounded-t-xl border border-[#2a2e39] px-4 py-2 flex flex-wrap justify-between items-center gap-2">
           <div className="flex gap-2 items-center">
             {['1H', '4H', '1D', '1W'].map((tf) => (
               <button
                 key={tf}
                 onClick={() => setActiveTimeframe(tf)}
-                className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                className={`px-3 py-1 rounded-lg text-sm font-medium transition-all ${
                   activeTimeframe === tf
-                    ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 shadow-lg'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/30'
+                    : 'text-gray-400 hover:text-white'
                 }`}
               >
                 {tf}
               </button>
             ))}
-            <div className="w-px h-6 bg-[#2a2e39] mx-2"></div>
+            <div className="w-px h-5 bg-[#2a2e39] mx-1"></div>
             <button 
               onClick={() => setShowEMAs(!showEMAs)} 
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-all ${
-                showEMAs ? 'text-white bg-white/5' : 'text-gray-400 hover:text-white'
+              className={`flex items-center gap-1 px-2 py-1 rounded text-xs transition-all ${
+                showEMAs ? 'text-white' : 'text-gray-400'
               }`}
             >
-              {showEMAs ? <Eye size={14} /> : <EyeOff size={14} />}
+              {showEMAs ? <Eye size={12} /> : <EyeOff size={12} />}
               EMAs
             </button>
             <button 
               onClick={() => setShowSignals(!showSignals)} 
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-all ${
-                showSignals ? 'text-white bg-white/5' : 'text-gray-400 hover:text-white'
+              className={`flex items-center gap-1 px-2 py-1 rounded text-xs transition-all ${
+                showSignals ? 'text-white' : 'text-gray-400'
               }`}
             >
-              {showSignals ? <Eye size={14} /> : <EyeOff size={14} />}
-              Señales PL7
+              {showSignals ? <Eye size={12} /> : <EyeOff size={12} />}
+              Señales
             </button>
           </div>
           
-          {/* Logo pequeño en toolbar */}
-          <div className="flex items-center gap-3">
-            {!logoError ? (
-              <img 
-                src="/images/price-logistic-7-logo.png"
-                alt="PL7"
-                className="w-6 h-6 object-contain opacity-60"
-                onError={() => setLogoError(true)}
-              />
-            ) : (
-              <Brain size={16} className="text-yellow-500/60" />
-            )}
-            <div className="flex gap-3 text-xs">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-0.5 bg-[#2962FF] rounded"></div>
-                <span className="text-gray-400">EMA 12</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-0.5 bg-[#FFD600] rounded"></div>
-                <span className="text-gray-400">EMA 26</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-[#00e676]"></div>
-                <span className="text-gray-400">BUY PL7</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-[#ff5252]"></div>
-                <span className="text-gray-400">SELL PL7</span>
-              </div>
-            </div>
+          <div className="flex gap-2 text-[10px]">
+            <span className="flex items-center gap-1"><span className="w-2 h-0.5 bg-[#2962FF]"></span> EMA 12</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-0.5 bg-[#FFD600]"></span> EMA 26</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#00e676]"></span> BUY PL7</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#ff5252]"></span> SELL PL7</span>
           </div>
         </div>
 
-        {/* Gráfico con marca de agua del logo */}
+        {/* Gráfico con marca de agua */}
         <div className="bg-[#131722] rounded-b-xl border border-[#2a2e39] border-t-0 overflow-hidden relative">
-          {/* Marca de agua del logo */}
-          <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-5 z-10">
+          <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-10 z-10">
             {!logoError ? (
-              <img 
+              <Image
+                width={150}
+                height={150}
                 src="/images/price-logistic-7-logo.png"
                 alt="Price Logistic 7"
-                className="w-48 h-48 object-contain"
+                className="w-36 h-36 object-contain"
               />
             ) : (
-              <Brain size={120} className="text-yellow-500" />
+              <Brain size={100} className="text-yellow-500" />
             )}
           </div>
           
@@ -399,75 +515,29 @@ export default function PriceLogistic7Dashboard() {
               className="block cursor-crosshair"
               style={{ backgroundColor: '#131722' }}
             >
-              {/* Grid Horizontal mejorado */}
+              {/* Grid Horizontal */}
               {[0, 0.2, 0.4, 0.6, 0.8, 1].map((ratio) => {
                 const y = paddingBottom + (graphHeight - paddingBottom - paddingTop) * (1 - ratio);
                 const price = minPrice + priceRange * ratio;
                 return (
                   <g key={`grid-h-${ratio}`}>
-                    <line
-                      x1="0"
-                      y1={y}
-                      x2={graphWidth}
-                      y2={y}
-                      stroke="#2a2e39"
-                      strokeWidth="0.5"
-                      strokeDasharray="4 4"
-                    />
-                    <text
-                      x={graphWidth - 8}
-                      y={y - 4}
-                      fill="#787b86"
-                      fontSize="10"
-                      textAnchor="end"
-                      className="font-mono"
-                    >
+                    <line x1="0" y1={y} x2={graphWidth} y2={y} stroke="#2a2e39" strokeWidth="0.5" strokeDasharray="4 4" />
+                    <text x={graphWidth - 5} y={y - 3} fill="#787b86" fontSize="9" textAnchor="end">
                       ${price >= 1000 ? (price/1000).toFixed(1) + 'k' : price.toFixed(0)}
                     </text>
                   </g>
                 );
               })}
               
-              {/* Grid Vertical */}
-              {Array.from({ length: 10 }).map((_, idx) => {
-                const x = (idx / 9) * graphWidth;
-                return (
-                  <line
-                    key={`grid-v-${idx}`}
-                    x1={x}
-                    y1={0}
-                    x2={x}
-                    y2={graphHeight}
-                    stroke="#2a2e39"
-                    strokeWidth="0.5"
-                    strokeDasharray="4 4"
-                  />
-                );
-              })}
-              
-              {/* EMAs con efecto de brillo */}
+              {/* EMAs */}
               {showEMAs && (
                 <>
-                  <polyline
-                    points={emaSlow.map((v, i) => `${getX(i)},${getY(v)}`).join(' ')}
-                    fill="none"
-                    stroke="#FFD600"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <polyline
-                    points={emaFast.map((v, i) => `${getX(i)},${getY(v)}`).join(' ')}
-                    fill="none"
-                    stroke="#2962FF"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                  <polyline points={emaSlow.map((v, i) => `${getX(i)},${getY(v)}`).join(' ')} fill="none" stroke="#FFD600" strokeWidth="2" />
+                  <polyline points={emaFast.map((v, i) => `${getX(i)},${getY(v)}`).join(' ')} fill="none" stroke="#2962FF" strokeWidth="2" />
                 </>
               )}
               
-              {/* Velas Japonesas con efecto 3D */}
+              {/* Velas */}
               {candles.map((candle, i) => {
                 const x = getX(i);
                 const isBullish = candle.close >= candle.open;
@@ -482,221 +552,83 @@ export default function PriceLogistic7Dashboard() {
                 const bodyHeight = Math.max(Math.abs(openY - closeY), 1);
                 
                 return (
-                  <g 
-                    key={`candle-${i}`} 
-                    onMouseEnter={() => setHoveredCandle(i)}
-                    onMouseLeave={() => setHoveredCandle(null)}
-                    className="transition-opacity"
-                  >
-                    {/* Mecha */}
-                    <line
-                      x1={x}
-                      y1={highY}
-                      x2={x}
-                      y2={lowY}
-                      stroke={color}
-                      strokeWidth={isHovered ? "1.5" : "1"}
-                    />
-                    {/* Cuerpo */}
-                    <rect
-                      x={x - candleWidth / 2}
-                      y={bodyY}
-                      width={candleWidth}
-                      height={Math.max(bodyHeight, 1)}
-                      fill={color}
-                      stroke={isHovered ? 'white' : color}
-                      strokeWidth={isHovered ? 1 : 0.5}
-                      rx={Math.min(2, candleWidth / 4)}
-                    />
-                    {/* Liquidity Grab indicator */}
-                    {candle.isLiquidityGrab && (
-                      <circle cx={x} cy={highY - 5} r="3" fill="#ff9800" stroke="white" strokeWidth="1" />
-                    )}
+                  <g key={`candle-${i}`} onMouseEnter={() => setHoveredCandle(i)} onMouseLeave={() => setHoveredCandle(null)}>
+                    <line x1={x} y1={highY} x2={x} y2={lowY} stroke={color} strokeWidth="1" />
+                    <rect x={x - candleWidth / 2} y={bodyY} width={candleWidth} height={Math.max(bodyHeight, 1)} fill={color} stroke={isHovered ? 'white' : color} strokeWidth={isHovered ? 1 : 0.5} rx={2} />
+                    {candle.isLiquidityGrab && <circle cx={x} cy={highY - 5} r="3" fill="#ff9800" stroke="white" strokeWidth="1" />}
                   </g>
                 );
               })}
               
-              {/* Señales con diseño PL7 */}
+              {/* Señales PL7 */}
               {showSignals && signals.map((signal, i) => {
                 const x = getX(signal.index);
                 const y = getY(signal.price);
                 const isBuy = signal.type === 'BUY';
                 const color = isBuy ? '#00e676' : '#ff5252';
-                const offset = isBuy ? -30 : 30;
+                const offset = isBuy ? -28 : 28;
                 
                 return (
-                  <g key={`signal-${i}`} className="cursor-pointer animate-in fade-in duration-300">
-                    <circle
-                      cx={x}
-                      cy={y}
-                      r="6"
-                      fill={color}
-                      stroke="white"
-                      strokeWidth="2"
-                      className="animate-pulse"
-                    />
-                    <circle
-                      cx={x}
-                      cy={y}
-                      r="14"
-                      fill={color}
-                      fillOpacity="0.2"
-                    />
-                    <rect
-                      x={x - 32}
-                      y={y + offset - 12}
-                      width="64"
-                      height="24"
-                      fill={color}
-                      rx="4"
-                      className="shadow-lg"
-                    />
-                    <text
-                      x={x}
-                      y={y + offset - 2}
-                      fill="black"
-                      fontSize="9"
-                      fontWeight="bold"
-                      textAnchor="middle"
-                    >
-                      {signal.type}
-                    </text>
+                  <g key={`signal-${i}`}>
+                    <circle cx={x} cy={y} r="5" fill={color} stroke="white" strokeWidth="1.5" />
+                    <circle cx={x} cy={y} r="12" fill={color} fillOpacity="0.2" />
+                    <rect x={x - 28} y={y + offset - 10} width="56" height="20" fill={color} rx="3" />
+                    <text x={x} y={y + offset + 4} fill="black" fontSize="8" fontWeight="bold" textAnchor="middle">{signal.type}</text>
                   </g>
                 );
               })}
               
-              {/* Tooltip mejorado */}
+              {/* Tooltip */}
               {hoveredCandle !== null && candles[hoveredCandle] && (
-                <g className="animate-in fade-in duration-150">
-                  <rect
-                    x={getX(hoveredCandle) - 85}
-                    y={10}
-                    width="170"
-                    height="100"
-                    fill="black"
-                    fillOpacity="0.95"
-                    rx="8"
-                    className="shadow-2xl"
-                  />
-                  <text x={getX(hoveredCandle)} y={28} fill="white" fontSize="11" textAnchor="middle" fontWeight="bold">
-                    Vela #{hoveredCandle + 1}
-                  </text>
-                  <text x={getX(hoveredCandle)} y={46} fill="#9ca3af" fontSize="9" textAnchor="middle">
-                    O: ${candles[hoveredCandle].open.toFixed(0)}
-                  </text>
-                  <text x={getX(hoveredCandle)} y={62} fill="#9ca3af" fontSize="9" textAnchor="middle">
-                    H: ${candles[hoveredCandle].high.toFixed(0)} | L: ${candles[hoveredCandle].low.toFixed(0)}
-                  </text>
-                  <text x={getX(hoveredCandle)} y={78} fill="#9ca3af" fontSize="9" textAnchor="middle">
-                    C: ${candles[hoveredCandle].close.toFixed(0)}
-                  </text>
-                  {candles[hoveredCandle].isLiquidityGrab && (
-                    <text x={getX(hoveredCandle)} y={94} fill="#ff9800" fontSize="8" textAnchor="middle" fontWeight="bold">
-                      🔥 Liquidity Grab
-                    </text>
-                  )}
+                <g>
+                  <rect x={getX(hoveredCandle) - 70} y={10} width="140" height="78" fill="black" fillOpacity="0.9" rx="6" />
+                  <text x={getX(hoveredCandle)} y={26} fill="white" fontSize="10" textAnchor="middle">Vela #{hoveredCandle + 1}</text>
+                  <text x={getX(hoveredCandle)} y={42} fill="#9ca3af" fontSize="8" textAnchor="middle">O: ${candles[hoveredCandle].open.toFixed(0)}</text>
+                  <text x={getX(hoveredCandle)} y={58} fill="#9ca3af" fontSize="8" textAnchor="middle">H: ${candles[hoveredCandle].high.toFixed(0)} | L: ${candles[hoveredCandle].low.toFixed(0)}</text>
+                  <text x={getX(hoveredCandle)} y={74} fill="#9ca3af" fontSize="8" textAnchor="middle">C: ${candles[hoveredCandle].close.toFixed(0)}</text>
                 </g>
               )}
             </svg>
           </div>
         </div>
 
-        {/* Stats Grid mejorado */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 mt-5">
-          <div className="bg-gradient-to-br from-[#0f1117] to-[#0b0d12] rounded-xl p-3 border border-[#2a2e39] hover:border-yellow-500/30 transition-all group">
-            <p className="text-gray-400 text-xs flex items-center gap-1">
-              <Target size={10} />
-              Señales PL7
-            </p>
-            <p className="text-2xl font-bold text-white">{stats?.totalSignals || 0}</p>
+        {/* Stats */}
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-2 mt-4">
+          <div className="bg-[#0f1117] rounded-lg p-2 text-center border border-[#2a2e39]">
+            <p className="text-gray-400 text-[10px]">Señales</p>
+            <p className="text-lg font-bold text-white">{stats?.totalSignals || 0}</p>
           </div>
-          <div className="bg-gradient-to-br from-[#0f1117] to-[#0b0d12] rounded-xl p-3 border border-[#2a2e39]">
-            <p className="text-gray-400 text-xs flex items-center gap-1">
-              <ArrowUp size={10} />
-              BUY
-            </p>
-            <p className="text-2xl font-bold text-[#26a69a]">{stats?.buySignals || 0}</p>
+          <div className="bg-[#0f1117] rounded-lg p-2 text-center border border-[#2a2e39]">
+            <p className="text-gray-400 text-[10px]">BUY</p>
+            <p className="text-lg font-bold text-[#26a69a]">{stats?.buySignals || 0}</p>
           </div>
-          <div className="bg-gradient-to-br from-[#0f1117] to-[#0b0d12] rounded-xl p-3 border border-[#2a2e39]">
-            <p className="text-gray-400 text-xs flex items-center gap-1">
-              <ArrowDown size={10} />
-              SELL
-            </p>
-            <p className="text-2xl font-bold text-[#ef5350]">{stats?.sellSignals || 0}</p>
+          <div className="bg-[#0f1117] rounded-lg p-2 text-center border border-[#2a2e39]">
+            <p className="text-gray-400 text-[10px]">SELL</p>
+            <p className="text-lg font-bold text-[#ef5350]">{stats?.sellSignals || 0}</p>
           </div>
-          <div className="bg-gradient-to-br from-[#0f1117] to-[#0b0d12] rounded-xl p-3 border border-[#2a2e39]">
-            <p className="text-gray-400 text-xs flex items-center gap-1">
-              <Gauge size={10} />
-              Fuerza
-            </p>
-            <p className="text-2xl font-bold text-yellow-500">{stats?.strongSignals || 0}</p>
+          <div className="bg-[#0f1117] rounded-lg p-2 text-center border border-[#2a2e39]">
+            <p className="text-gray-400 text-[10px]">Fuerza</p>
+            <p className="text-lg font-bold text-yellow-500">{stats?.strongSignals || 0}</p>
           </div>
-          <div className="bg-gradient-to-br from-[#0f1117] to-[#0b0d12] rounded-xl p-3 border border-[#2a2e39]">
-            <p className="text-gray-400 text-xs">Volumen 24h</p>
-            <p className="text-lg font-bold text-white">$1.2B</p>
+          <div className="bg-[#0f1117] rounded-lg p-2 text-center border border-[#2a2e39]">
+            <p className="text-gray-400 text-[10px]">Liquidity</p>
+            <p className="text-lg font-bold text-orange-400">{candles.filter(c => c.isLiquidityGrab).length}</p>
           </div>
-          <div className="bg-gradient-to-br from-[#0f1117] to-[#0b0d12] rounded-xl p-3 border border-[#2a2e39]">
-            <p className="text-gray-400 text-xs">Precisión PL7</p>
-            <p className="text-lg font-bold text-white">87.3%</p>
+          <div className="bg-[#0f1117] rounded-lg p-2 text-center border border-[#2a2e39]">
+            <p className="text-gray-400 text-[10px]">Precisión</p>
+            <p className="text-lg font-bold text-white">87%</p>
           </div>
         </div>
 
-        {/* Signals List mejorada */}
-        {showSignals && signals.length > 0 && (
-          <div className="mt-5 bg-gradient-to-br from-[#0f1117] to-[#0b0d12] rounded-xl border border-[#2a2e39] p-4">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs text-gray-400 flex items-center gap-2">
-                <Activity size={12} />
-                Señales PL7 Recientes - Últimas 6
-              </p>
-              {!logoError && (
-                <img 
-                  src="/images/price-logistic-7-logo.png"
-                  alt="PL7"
-                  className="w-5 h-5 object-contain opacity-50"
-                />
-              )}
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {signals.slice(-6).reverse().map((signal, idx) => (
-                <div
-                  key={idx}
-                  className={`group relative px-3 py-1.5 rounded-lg text-xs font-bold transition-all hover:scale-105 ${
-                    signal.type === 'BUY'
-                      ? 'bg-[#26a69a]/10 text-[#26a69a] border border-[#26a69a]/30 hover:bg-[#26a69a]/20'
-                      : 'bg-[#ef5350]/10 text-[#ef5350] border border-[#ef5350]/30 hover:bg-[#ef5350]/20'
-                  }`}
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-yellow-500">PL7</span>
-                    {signal.type === 'BUY' ? <ArrowUp size={10} /> : <ArrowDown size={10} />}
-                    <span className="font-mono">${Math.round(signal.price)}</span>
-                    <span className="text-[10px] opacity-75">•</span>
-                    <span className="text-[10px]">{signal.reason}</span>
-                    {signal.strength === 'strong' && (
-                      <span className="text-yellow-500 text-[10px]">🔥</span>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Footer mejorado con logo */}
+        {/* Footer */}
         <div className="mt-6 text-center">
-          <div className="inline-flex items-center gap-4 text-gray-500 text-[10px] bg-[#0f1117]/50 px-5 py-2 rounded-full">
-            <span className="flex items-center gap-1">📊 PL7 Engine Active</span>
-            <span className="flex items-center gap-1">🟢 PL7 BUY</span>
-            <span className="flex items-center gap-1">🔴 PL7 SELL</span>
-            <span className="flex items-center gap-1">🟡 EMA 26</span>
-            <span className="flex items-center gap-1">🔵 EMA 12</span>
-            <span className="flex items-center gap-1">
-              {!logoError && (
-                <img src="/images/price-logistic-7-logo.png" alt="PL7" className="w-3 h-3 object-contain" />
-              )}
-              Price Logistic 7
-            </span>
+          <div className="inline-flex items-center gap-3 text-gray-500 text-[10px] bg-[#0f1117]/50 px-4 py-2 rounded-full">
+            <span>📊 PL7 Engine Active</span>
+            <span>🟢 Señales de compra</span>
+            <span>🔴 Señales de venta</span>
+            <span>🟡 EMA 26</span>
+            <span>🔵 EMA 12</span>
+            <span>🔥 Liquidity Grab detectado</span>
           </div>
         </div>
       </div>
