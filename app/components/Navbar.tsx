@@ -24,7 +24,7 @@ export default function Navbar() {
     { href: '#video', label: 'Video' },
   ];
 
-  const whatsappUrl = 'https://chat.whatsapp.com/K2VgqUgYWlx5nTJY2HP58a?mode=gi_t';
+  const whatsappUrl = 'https://api.whatsapp.com/send?phone=50379587850&text=Hola%20quiero%20informacion%20sobre%20las%20clases%20de%20trading';
 
   return (
     <nav

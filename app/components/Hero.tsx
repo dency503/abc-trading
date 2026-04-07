@@ -109,7 +109,7 @@ export default function Hero() {
             className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-8 py-4 font-semibold text-white transition hover:border-yellow-500/70 hover:bg-yellow-500/10 hover:scale-105"
           >
             <Play size={20} />
-            Ver como enseno
+            Ver como enseño
           </button>
         </div>
 
@@ -122,9 +122,9 @@ export default function Hero() {
             <span className="text-sm font-semibold uppercase tracking-[0.2em]">Mi historia</span>
           </div>
           <p className="text-sm text-gray-300 md:text-base">
-            No soy una academia grande. Soy alguien de El Salvador que aprendio trading y ahora quiere compartir lo que le funciono para ayudar a otros a empezar mejor.
+            No soy una academia. No es esquema ponzi, no es una esquema piramidal. Soy alguien de El Salvador que aprendio trading y ahora quiere compartir lo que le funciono para ayudar a otros a empezar mejor.
           </p>
-        </div>
+                  </div>
       </div>
     </section>
   );

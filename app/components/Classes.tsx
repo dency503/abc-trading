@@ -55,13 +55,20 @@ export default function TradingClass() {
       color: "text-amber-400",
       bgColor: "bg-amber-400/10",
     },
+    {
+      icon: Users,
+      title: "Seguimiento y operativa",
+      description: "Después de clases seguimos en contacto y operamos juntos para reforzar lo aprendido.",
+      color: "text-sky-400",
+      bgColor: "bg-sky-400/10",
+    },
   ];
 
   const bonos = [
     {
       icon: Bot,
-title: "Alertas de Trading en Tiempo Real",
-desc: "Señales precisas directo a tu Telegram."
+      title: "Bot de señales +1",
+      desc: "Recibe señales de apoyo como referencia directa en Telegram.",
     },
     {
       icon: ActivitySquare,
@@ -71,7 +78,7 @@ desc: "Señales precisas directo a tu Telegram."
     {
       icon: Users,
       title: "Seguimiento Cercano",
-      desc: "Te unes al estudio directamente conmigo.",
+      desc: "Después del curso seguimos trabajando juntos y operamos en comunidad.",
     },
   ];
 
@@ -199,9 +206,16 @@ desc: "Señales precisas directo a tu Telegram."
                 
                 <div className="flex items-center justify-center gap-2">
                   <span className="text-2xl font-bold text-gray-400">$</span>
-                  <span className="text-6xl font-black text-white">149<span className="text-3xl text-gray-400">.99</span></span>
+                  <span className="text-6xl font-black text-white">129<span className="text-3xl text-gray-400">.99</span></span>
                 </div>
-                <p className="text-sm text-gray-400 mt-2">Pago único • 8 semanas de formación intensiva</p>
+                <p className="text-sm text-gray-400 mt-2">Puedes pagar en 2 partes • 8 semanas de formación intensiva</p>
+              </div>
+
+              <div className="mb-6 rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="text-sm font-semibold text-white">Forma de pago</p>
+                <p className="mt-2 text-sm leading-relaxed text-gray-300">
+                  Primer pago antes de la primera clase y segundo pago antes de la quinta clase.
+                </p>
               </div>
 
               {/* Bonos Adicionales */}

@@ -1,12 +1,19 @@
-﻿'use client';
-import Image from 'next/image';
-import { Phone, Mail, MapPin, ArrowUpRight, BadgeCheck, HeartHandshake } from 'lucide-react';
+﻿"use client";
+import Image from "next/image";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  ArrowUpRight,
+  BadgeCheck,
+  HeartHandshake,
+} from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -19,10 +26,12 @@ export default function Footer() {
                 Hablemos claro
               </p>
               <h2 className="mb-3 text-3xl font-black text-white md:text-4xl">
-                Comparto desde El Salvador lo que aprendi para ayudarte a empezar mejor
+                Comparto desde El Salvador lo que aprendi para ayudarte a
+                empezar mejor
               </h2>
               <p className="max-w-2xl text-gray-300">
-                Si quieres conocer mis horarios, el precio o como son las clases, escribeme por WhatsApp y te respondo directamente.
+                Si quieres conocer mis horarios, el precio o como son las
+                clases, escribeme por WhatsApp y te respondo directamente.
               </p>
             </div>
             <a
@@ -40,29 +49,65 @@ export default function Footer() {
         <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-4">
           <div>
             <div className="mb-4 cursor-pointer" onClick={scrollToTop}>
-<Image
-  src="/logo.png"
-  alt="ABC del Trading 503"
-  width={300}
-  height={90}
-  className="h-24 w-auto object-contain 
+              <Image
+                src="/logo.png"
+                alt="ABC del Trading 503"
+                width={300}
+                height={90}
+                className="h-24 w-auto object-contain 
              drop-shadow-[0_14px_40px_rgba(255,215,0,0.35)]
              hover:scale-105 transition"
-/>
-</div>
+              />
+            </div>
             <p className="text-sm leading-6 text-gray-400">
-              Comparto clases online de trading desde El Salvador para personas que quieren aprender con una guia clara y cercana.
+              Comparto clases online de trading desde El Salvador para personas
+              que quieren aprender con una guia clara y cercana.
             </p>
           </div>
 
           <div>
             <h3 className="mb-4 font-semibold text-white">Enlaces rapidos</h3>
             <ul className="space-y-2">
-              <li><a href="#inicio" className="text-sm text-gray-400 transition hover:text-yellow-400">Inicio</a></li>
-              <li><a href="#indicadores" className="text-sm text-gray-400 transition hover:text-yellow-400">Indicadores</a></li>
-              <li><a href="#clases" className="text-sm text-gray-400 transition hover:text-yellow-400">Clases</a></li>
-              <li><a href="#galeria" className="text-sm text-gray-400 transition hover:text-yellow-400">Resultados</a></li>
-              <li><a href="#video" className="text-sm text-gray-400 transition hover:text-yellow-400">Video</a></li>
+              <li>
+                <a
+                  href="#inicio"
+                  className="text-sm text-gray-400 transition hover:text-yellow-400"
+                >
+                  Inicio
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#indicadores"
+                  className="text-sm text-gray-400 transition hover:text-yellow-400"
+                >
+                  Indicadores
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#clases"
+                  className="text-sm text-gray-400 transition hover:text-yellow-400"
+                >
+                  Clases
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#galeria"
+                  className="text-sm text-gray-400 transition hover:text-yellow-400"
+                >
+                  Resultados
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#video"
+                  className="text-sm text-gray-400 transition hover:text-yellow-400"
+                >
+                  Video
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -70,12 +115,31 @@ export default function Footer() {
             <h3 className="mb-4 font-semibold text-white">Contacto</h3>
             <ul className="space-y-2">
               <li className="flex items-center gap-2 text-sm text-gray-400">
-                <Phone size={14} />
-                <span>+1 234 567 890</span>
+                <span>💬</span>
+                <a
+                  href="https://t.me/Hit_503"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-yellow-400"
+                >
+                  @Hit_503
+                </a>
               </li>
               <li className="flex items-center gap-2 text-sm text-gray-400">
                 <Mail size={14} />
                 <span>info@abc-trading.com</span>
+              </li>
+
+              <li className="flex items-center gap-2 text-sm text-gray-400">
+                <span>📱</span>
+                <a
+                  href="https://www.tiktok.com/@trader.503"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-yellow-400"
+                >
+                  @trader.503
+                </a>
               </li>
               <li className="flex items-center gap-2 text-sm text-gray-400">
                 <MapPin size={14} />
@@ -96,7 +160,8 @@ export default function Footer() {
                 <span className="text-sm font-semibold">Mas cercano</span>
               </div>
               <p className="text-sm leading-6 text-gray-400">
-                No vendo humo. Comparto lo que aprendi, explico con claridad y acompano a quienes quieren empezar con mejor base.
+                No vendo humo. Comparto lo que aprendi, explico con claridad y
+                acompano a quienes quieren empezar con mejor base.
               </p>
             </div>
           </div>
@@ -104,7 +169,9 @@ export default function Footer() {
 
         <div className="border-t border-white/10 pt-8">
           <div className="text-center">
-            <p className="text-sm text-gray-500">(c) {currentYear} ABC-TRADING. Todos los derechos reservados.</p>
+            <p className="text-sm text-gray-500">
+              (c) {currentYear} ABC-TRADING. Todos los derechos reservados.
+            </p>
             <p className="mt-2 text-xs text-gray-600">Hecho en El Salvador</p>
           </div>
         </div>

@@ -210,8 +210,8 @@ const isPositive = changeValue >= 0;
   useEffect(() => {
     const initializeData = () => {
       const data = generateRealCryptoData();
-      const fast = calculateEMA(data, 12);
-      const slow = calculateEMA(data, 26);
+      const fast = calculateEMA(data, 50);
+      const slow = calculateEMA(data, 350);
       const newSignals = findExactPivots(data, fast, slow);
       
       setCandles(data);
@@ -366,27 +366,14 @@ const isPositive = changeValue >= 0;
           <div className="space-y-3 mb-6">
             <div className="flex justify-between items-center p-3.5 rounded-xl border border-gray-800 bg-white/5 hover:border-gray-600 transition-colors">
               <span className="text-gray-300 font-medium">1 Mes</span>
-              <span className="text-white font-bold text-lg">$39.99</span>
-            </div>
-            
-            <div className="flex justify-between items-center p-3.5 rounded-xl border border-gray-800 bg-white/5 hover:border-gray-600 transition-colors">
-              <span className="text-gray-300 font-medium">3 Meses</span>
-              <span className="text-white font-bold text-lg">$99.99</span>
+              <span className="text-white font-bold text-lg">$34.99</span>
             </div>
             
             <div className="flex justify-between items-center p-3.5 rounded-xl border border-gray-800 bg-white/5 hover:border-gray-600 transition-colors">
               <span className="text-gray-300 font-medium">1 Año</span>
-              <span className="text-white font-bold text-lg">$199.99</span>
+              <span className="text-white font-bold text-lg">$299.99</span>
             </div>
-            
-            {/* Plan de por vida destacado */}
-            <div className="flex justify-between items-center p-4 rounded-xl border-2 border-yellow-500/50 bg-yellow-500/10 relative overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.1)]">
-              <div className="absolute top-0 right-0 bg-yellow-500 text-black text-[10px] font-bold px-3 py-0.5 rounded-bl-lg">
-                MEJOR INVERSIÓN
-              </div>
-              <span className="text-yellow-400 font-bold mt-1">De por vida</span>
-              <span className="text-yellow-400 font-black text-2xl mt-1">$499.99</span>
-            </div>
+
           </div>
 
           {/* Bono: 2 Videos de uso */}
@@ -466,7 +453,7 @@ const isPositive = changeValue >= 0;
         {/* Toolbar */}
         <div className="bg-[#0f1117] rounded-t-xl border border-[#2a2e39] px-4 py-2 flex flex-wrap justify-between items-center gap-2">
           <div className="flex gap-2 items-center">
-            {['1H', '4H', '1D', '1W'].map((tf) => (
+            {['1H', '4H'].map((tf) => (
               <button
                 key={tf}
                 onClick={() => setActiveTimeframe(tf)}
@@ -501,10 +488,10 @@ const isPositive = changeValue >= 0;
           </div>
           
           <div className="flex gap-2 text-[10px]">
-            <span className="flex items-center gap-1"><span className="w-2 h-0.5 bg-[#2962FF]"></span> EMA 12</span>
-            <span className="flex items-center gap-1"><span className="w-2 h-0.5 bg-[#FFD600]"></span> EMA 26</span>
-            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#00e676]"></span> BUY PL7</span>
-            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#ff5252]"></span> SELL PL7</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-0.5 bg-[#2962FF]"></span> EMA 50</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-0.5 bg-[#FFD600]"></span> EMA 350</span>
+            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#00e676]"></span></span>
+            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#ff5252]"></span></span>
           </div>
         </div>
 
@@ -584,14 +571,10 @@ const isPositive = changeValue >= 0;
                 const y = getY(signal.price);
                 const isBuy = signal.type === 'BUY';
                 const color = isBuy ? '#00e676' : '#ff5252';
-                const offset = isBuy ? -28 : 28;
-                
                 return (
                   <g key={`signal-${i}`}>
                     <circle cx={x} cy={y} r="5" fill={color} stroke="white" strokeWidth="1.5" />
                     <circle cx={x} cy={y} r="12" fill={color} fillOpacity="0.2" />
-                    <rect x={x - 28} y={y + offset - 10} width="56" height="20" fill={color} rx="3" />
-                    <text x={x} y={y + offset + 4} fill="black" fontSize="8" fontWeight="bold" textAnchor="middle">{signal.type}</text>
                   </g>
                 );
               })}
@@ -638,17 +621,7 @@ const isPositive = changeValue >= 0;
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="mt-6 text-center">
-          <div className="inline-flex items-center gap-3 text-gray-500 text-[10px] bg-[#0f1117]/50 px-4 py-2 rounded-full">
-            <span>📊 PL7 Engine Active</span>
-            <span>🟢 Señales de compra</span>
-            <span>🔴 Señales de venta</span>
-            <span>🟡 EMA 26</span>
-            <span>🔵 EMA 12</span>
-            <span>🔥 Liquidity Grab detectado</span>
-          </div>
-        </div>
+       
       </div>
     </section>
   );
