@@ -47,10 +47,11 @@ export default function Home() {
       />
       <Navbar />
       <Hero />
-      <Indicators />
+       <VideoSection />
+      
       <Classes />
       <Gallery />
-      <VideoSection />
+     <Indicators />
       <Comments />
       <Footer />
     </main>

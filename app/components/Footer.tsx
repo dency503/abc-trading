@@ -115,6 +115,10 @@ export default function Footer() {
             <h3 className="mb-4 font-semibold text-white">Contacto</h3>
             <ul className="space-y-2">
               <li className="flex items-center gap-2 text-sm text-gray-400">
+                <Phone size={14} />
+                <span>Telefono directo: 79587850</span>
+              </li>
+              <li className="flex items-center gap-2 text-sm text-gray-400">
                 <span>💬</span>
                 <a
                   href="https://t.me/Hit_503"
