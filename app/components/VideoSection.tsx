@@ -1,165 +1,122 @@
 'use client';
 
-import { Play, Pause, Volume2, VolumeX, Maximize, CheckCircle2, MessageCircleMore } from 'lucide-react';
-import { useRef, useState } from 'react';
+import {
+  CheckCircle2,
+  MessageCircleMore,
+  PlayCircle,
+  ShieldCheck,
+  BookOpen,
+  BarChart3,
+} from 'lucide-react';
 
 export default function VideoSection() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
-
-  const handleTimeUpdate = () => {
-    if (videoRef.current) {
-      setCurrentTime(videoRef.current.currentTime);
-    }
-  };
-
-  const handleLoadedMetadata = () => {
-    if (videoRef.current) {
-      setDuration(videoRef.current.duration);
-    }
-  };
-
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (videoRef.current) {
-      const time = parseFloat(e.target.value);
-      videoRef.current.currentTime = time;
-      setCurrentTime(time);
-    }
-  };
-
-  const handleFullscreen = () => {
-    if (videoRef.current && videoRef.current.requestFullscreen) {
-      videoRef.current.requestFullscreen();
-    }
-  };
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
-
-  const progress = (currentTime / duration) * 100 || 0;
-
   return (
-    <section id="video" className="py-24">
-      <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-12 text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-yellow-400 mb-4">
-              Conoce la experiencia
+    <section
+      id="video"
+      className="relative overflow-hidden py-20 md:py-28"
+    >
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(250,204,21,0.10),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(34,197,94,0.08),transparent_24%)]" />
+
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto mb-12 max-w-3xl text-center md:mb-16">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.28em] text-yellow-400">
+              Antes de unirte
             </p>
-            <h2 className="text-4xl md:text-5xl font-black mb-5">
-              Mira el estilo de explicacion antes de unirte
+
+            <h2 className="mb-5 text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl">
+              Quiero que primero entiendas cómo trabajamos aquí
             </h2>
-            <p className="mx-auto max-w-3xl text-lg text-gray-300">
-              Este bloque ahora funciona como prueba visual de confianza: le muestra al visitante que si hay contenido, criterio y acompanamiento real.
+
+            <p className="text-base leading-7 text-gray-300 md:text-lg">
+              Este video no es para impresionarte. Es para que veas con claridad
+              cómo explico, qué enseño y qué tipo de mentalidad necesitas si de
+              verdad quieres aprender trading.
             </p>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.42)] bg-black group">
-              <video
-                ref={videoRef}
-                className="w-full"
-                poster="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800"
-                onTimeUpdate={handleTimeUpdate}
-                onLoadedMetadata={handleLoadedMetadata}
-              >
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
-                Tu navegador no soporta el elemento de video.
-              </video>
+          <div className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-start">
+            <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
+              <div className="flex items-center justify-between border-b border-white/10 px-5 py-4 sm:px-6">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-yellow-500/15 text-yellow-400">
+                    <PlayCircle size={22} />
+                  </div>
 
-              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300">
-                <button
-                  onClick={togglePlay}
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-yellow-500 hover:bg-yellow-600 text-black p-4 rounded-full transition transform hover:scale-110 opacity-0 group-hover:opacity-100"
-                >
-                  {isPlaying ? <Pause size={32} /> : <Play size={32} />}
-                </button>
+                  <div>
+                    <p className="text-sm font-semibold text-white">
+                      Introducción al programa
+                    </p>
+                    <p className="text-sm text-gray-400">
+                      Mira primero esto antes de tomar una decisión
+                    </p>
+                  </div>
+                </div>
+
+                <div className="hidden rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-gray-300 sm:block">
+                  Explicación real
+                </div>
               </div>
 
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="mb-2">
-                  <input
-                    type="range"
-                    min="0"
-                    max={duration}
-                    value={currentTime}
-                    onChange={handleSeek}
-                    className="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer"
-                    style={{
-                      background: `linear-gradient(to right, #EAB308 ${progress}%, #4B5563 ${progress}%)`,
-                    }}
+              <div className="p-3 sm:p-4">
+                <div className="relative aspect-video overflow-hidden rounded-[1.6rem] bg-black ring-1 ring-white/10">
+                  <iframe
+                    className="absolute inset-0 h-full w-full"
+                    src="https://www.youtube.com/embed/3qg1mGl2O2o"
+                    title="ABC Trading - Introducción"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
                   />
                 </div>
+              </div>
 
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <button onClick={togglePlay} className="text-white hover:text-yellow-400 transition">
-                      {isPlaying ? <Pause size={20} /> : <Play size={20} />}
-                    </button>
-                    <button onClick={toggleMute} className="text-white hover:text-yellow-400 transition">
-                      {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-                    </button>
-                    <span className="text-white text-sm">
-                      {formatTime(currentTime)} / {formatTime(duration)}
-                    </span>
-                  </div>
-                  <button onClick={handleFullscreen} className="text-white hover:text-yellow-400 transition">
-                    <Maximize size={20} />
-                  </button>
-                </div>
+              <div className="border-t border-white/10 px-5 py-5 sm:px-6">
+                <p className="text-sm leading-6 text-gray-300 md:text-base">
+                  Aquí te explico qué es realmente el trading, qué errores comete
+                  la mayoría al iniciar y cómo es el proceso de formación dentro
+                  de ABC Trading.
+                </p>
               </div>
             </div>
 
-            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 md:p-10 backdrop-blur">
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-yellow-400 mb-4">
-                Por que este video ayuda a vender
-              </p>
-              <h3 className="text-3xl font-black mb-6 text-white">
-                Reduce dudas y acelera la decision
-              </h3>
-              <div className="space-y-4 mb-8">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="text-[#22c55e] mt-0.5 shrink-0" size={20} />
-                  <p className="text-gray-300">Le da al visitante una muestra real del tono, claridad y valor de las clases.</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="text-[#22c55e] mt-0.5 shrink-0" size={20} />
-                  <p className="text-gray-300">Hace que la propuesta se sienta tangible, no solo una promesa escrita.</p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="text-[#22c55e] mt-0.5 shrink-0" size={20} />
-                  <p className="text-gray-300">Prepara al prospecto para el CTA final y mejora la conversion a WhatsApp.</p>
+            <div className="flex flex-col gap-5">
+              <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur md:p-7">
+                <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-yellow-400">
+                  Este video es para ti si
+                </p>
+
+                <div className="space-y-5">
+                  <div className="flex items-start gap-3">
+                    <ShieldCheck className="mt-0.5 shrink-0 text-green-500" size={20} />
+                    <p className="text-sm leading-6 text-gray-300 md:text-base">
+                      Quieres entender el trading sin humo, sin falsas promesas y sin venderte sueños.
+                    </p>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <BookOpen className="mt-0.5 shrink-0 text-green-500" size={20} />
+                    <p className="text-sm leading-6 text-gray-300 md:text-base">
+                      Estás dispuesto a estudiar, practicar y aprender con estructura.
+                    </p>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <BarChart3 className="mt-0.5 shrink-0 text-green-500" size={20} />
+                    <p className="text-sm leading-6 text-gray-300 md:text-base">
+                      Buscas una base clara para empezar desde cero y avanzar con criterio.
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className="rounded-[1.75rem] border border-yellow-500/20 bg-yellow-500/10 p-6 mb-6">
-                <p className="text-sm text-yellow-200 mb-2">CTA recomendado debajo del video</p>
-                <p className="text-lg font-semibold text-white">
-                  Quiero recibir horarios, precio y forma de acceso
+              <div className="rounded-[2rem] border border-yellow-500/20 bg-yellow-500/10 p-6">
+                <p className="mb-2 text-sm font-medium text-yellow-200">
+                  Si conectas con esta forma de enseñar
+                </p>
+
+                <p className="text-lg font-semibold leading-7 text-white">
+                  Escríbeme y te explico horarios, precio y cómo puedes entrar al próximo grupo.
                 </p>
               </div>
 
@@ -167,11 +124,49 @@ export default function VideoSection() {
                 href="https://chat.whatsapp.com/K2VgqUgYWlx5nTJY2HP58a?mode=gi_t"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-[#22c55e] to-[#16a34a] px-6 py-4 font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgba(34,197,94,0.28)]"
+                className="inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-[#22c55e] to-[#16a34a] px-6 py-4 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_36px_rgba(34,197,94,0.28)] md:text-base"
               >
                 <MessageCircleMore size={20} />
-                Recibir horarios y precio
+                Quiero más información
               </a>
+            </div>
+          </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-white/5 text-yellow-400">
+                <CheckCircle2 size={18} />
+              </div>
+              <h3 className="mb-2 text-base font-bold text-white">
+                Sin falsas expectativas
+              </h3>
+              <p className="text-sm leading-6 text-gray-400">
+                Aquí se habla claro: esto no se trata de ganar rápido, sino de aprender bien.
+              </p>
+            </div>
+
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-white/5 text-yellow-400">
+                <CheckCircle2 size={18} />
+              </div>
+              <h3 className="mb-2 text-base font-bold text-white">
+                Formación con estructura
+              </h3>
+              <p className="text-sm leading-6 text-gray-400">
+                Se explica el proceso, la metodología y lo que realmente vas a trabajar dentro.
+              </p>
+            </div>
+
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-white/5 text-yellow-400">
+                <CheckCircle2 size={18} />
+              </div>
+              <h3 className="mb-2 text-base font-bold text-white">
+                Para gente que sí quiere aprender
+              </h3>
+              <p className="text-sm leading-6 text-gray-400">
+                Si buscas disciplina, criterio y acompañamiento, este video te va a ayudar a decidir.
+              </p>
             </div>
           </div>
         </div>
