@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { siteConfig } from './seo';
+import GoogleAnalytics from './components/GoogleAnalytics';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  category: 'education',
   openGraph: {
     type: 'website',
     url: siteConfig.url,
@@ -38,6 +40,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
 };
 
@@ -48,7 +57,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es-SV">
-      <body>{children}</body>
+      <body>
+        <GoogleAnalytics />
+        {children}
+      </body>
     </html>
   );
 }

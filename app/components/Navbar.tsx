@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, MessageCircle, ShieldCheck, MapPin } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { getWhatsAppUrl, navLinks } from '../content';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,113 +18,105 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { href: '#inicio', label: 'Inicio' },
-    { href: '#indicadores', label: 'Indicadores' },
-    { href: '#clases', label: 'Clases' },
-    { href: '#galeria', label: 'Resultados' },
-    { href: '#video', label: 'Video' },
-  ];
-
-  const whatsappUrl = 'https://api.whatsapp.com/send?phone=50379587850&text=Hola%20quiero%20informacion%20sobre%20las%20clases%20de%20trading';
+  const whatsappUrl = getWhatsAppUrl();
 
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#06080d]/90 border-b border-yellow-400/10 shadow-[0_12px_40px_rgba(0,0,0,0.28)] backdrop-blur-xl'
-          : 'bg-transparent'
+          ? 'border-b border-[rgba(53,78,82,0.12)] bg-white/88 shadow-[0_12px_40px_rgba(53,78,82,0.12)] backdrop-blur-xl'
+          : 'bg-white/65 backdrop-blur'
       }`}
     >
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between gap-4">
-          <a href="#inicio" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <Image
               src="/logo.png"
               alt="ABC del Trading 503"
               width={44}
               height={44}
-              className="h-11 w-11 rounded-xl object-contain ring-1 ring-white/10"
+              className="h-11 w-11 rounded-xl object-contain ring-1 ring-[rgba(53,78,82,0.12)] shadow-[0_10px_24px_rgba(53,78,82,0.16)]"
             />
             <div>
-              <div className="text-lg font-bold tracking-[0.22em] text-white">ABC DEL TRADING 503</div>
-              <div className="hidden sm:flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-gray-400">
-                <MapPin size={12} className="text-yellow-400" />
-                Desde El Salvador para latinoamerica
+              <div className="text-lg font-bold tracking-[0.22em] text-[var(--ink-main)]">ABC DEL TRADING 503</div>
+              <div className="hidden sm:flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-[var(--ink-soft)]">
+                <MapPin size={12} className="text-[var(--brand-yellow)]" />
+                Desde El Salvador para Latinoamérica
               </div>
             </div>
-          </a>
+          </Link>
 
-          <div className="hidden md:flex items-center space-x-8 rounded-full border border-white/10 bg-white/5 px-6 py-3 backdrop-blur">
+          <div className="hidden items-center space-x-8 rounded-full border border-[rgba(53,78,82,0.14)] bg-white/80 px-6 py-3 shadow-sm backdrop-blur md:flex">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm text-gray-200 transition-colors hover:text-yellow-400"
+                className="text-sm text-[var(--ink-main)] transition-colors hover:text-[var(--brand-yellow)]"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
           <div className="hidden md:flex items-center gap-3">
-            <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-right">
-              <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-yellow-300">
+            <div className="rounded-full border border-[rgba(53,78,82,0.14)] bg-white/80 px-4 py-2 text-right shadow-sm">
+              <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[var(--brand-yellow)]">
                 <ShieldCheck size={12} />
                 Mentor independiente
               </div>
-              <div className="text-xs text-gray-300">El Salvador</div>
+              <div className="text-xs text-[var(--ink-muted)]">El Salvador</div>
             </div>
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#22c55e] to-[#16a34a] px-5 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(34,197,94,0.25)]"
+              className="brand-cta-secondary inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all hover:-translate-y-0.5"
             >
               <MessageCircle size={18} />
-              Escribeme por WhatsApp
+              Escríbeme por WhatsApp
             </a>
           </div>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-white focus:outline-none md:hidden"
+            className="text-[var(--ink-main)] focus:outline-none md:hidden"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {isOpen && (
-          <div className="mt-4 overflow-hidden rounded-3xl border border-white/10 bg-[#0b1017]/95 shadow-2xl md:hidden">
-            <div className="border-b border-white/10 px-5 py-4">
-              <p className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-yellow-300">
+          <div className="mt-4 overflow-hidden rounded-3xl border border-[rgba(53,78,82,0.14)] bg-white/95 shadow-2xl md:hidden">
+            <div className="border-b border-[rgba(53,78,82,0.12)] px-5 py-4">
+              <p className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[var(--brand-yellow)]">
                 <MapPin size={12} />
-                 Desde El Salvador para latinoamerica
+                 Desde El Salvador para Latinoamérica
               </p>
-              <p className="mt-2 text-sm text-gray-300">
+              <p className="mt-2 text-sm text-[var(--ink-muted)]">
                 Comparto clases online de trading con un enfoque claro, cercano y real.
               </p>
             </div>
 
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
-                className="block px-5 py-3 text-sm text-gray-200 transition-colors hover:bg-white/5 hover:text-yellow-400"
+                className="block px-5 py-3 text-sm text-[var(--ink-main)] transition-colors hover:bg-[var(--petroleum-light)] hover:text-[var(--brand-blue-strong)]"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="m-4 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#22c55e] to-[#16a34a] px-4 py-3 text-center font-semibold text-white"
+              className="brand-cta-secondary m-4 flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-center font-semibold"
               onClick={() => setIsOpen(false)}
             >
               <MessageCircle size={18} />
-              Quiero informacion
+              Quiero información
             </a>
           </div>
         )}
@@ -130,3 +124,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
+

@@ -1,43 +1,19 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Indicators from './components/Indicators';
-import Classes from './components/Classes';
-import Gallery from './components/Gallery';
+import BingXPartner from './components/BingXPartner';
 import VideoSection from './components/VideoSection';
-import Footer from './components/Footer';
+import WhyChoose from './components/WhyChoose';
+import WhatYouGet from './components/WhatYouGet';
+import CTASection from './components/CTASection';
+import Testimonials from './components/Testimonials';
+import FAQ from './components/FAQ';
+import CommunityLinks from './components/CommunityLinks';
 import Comments from './components/Comments';
-import { siteConfig } from './seo';
+import Footer from './components/Footer';
+import { buildHomeJsonLd } from './seo';
 
 export default function Home() {
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'Organization',
-        name: siteConfig.name,
-        url: siteConfig.url,
-        logo: `${siteConfig.url}${siteConfig.ogImage}`,
-        description: siteConfig.description,
-        areaServed: 'Latinoamerica',
-        address: {
-          '@type': 'PostalAddress',
-          addressCountry: 'SV',
-        },
-      },
-      {
-        '@type': 'Service',
-        serviceType: 'Clases de trading online',
-        provider: {
-          '@type': 'Organization',
-          name: siteConfig.name,
-          url: siteConfig.url,
-        },
-        areaServed: 'Latinoamerica',
-        availableLanguage: 'es',
-        description: siteConfig.description,
-      },
-    ],
-  };
+  const structuredData = buildHomeJsonLd();
 
   return (
     <main className="min-h-screen">
@@ -47,12 +23,16 @@ export default function Home() {
       />
       <Navbar />
       <Hero />
-       <VideoSection />
-      
-      <Classes />
-      <Gallery />
-     <Indicators />
+      <BingXPartner />
+      <VideoSection />
+      <WhyChoose />
+      <WhatYouGet />
+      <CTASection />
+      <Testimonials />
+     
+      <CommunityLinks />
       <Comments />
+       <FAQ />
       <Footer />
     </main>
   );
