@@ -32,7 +32,7 @@ export default function Testimonials() {
               </div>
 
               <p className="mb-4 text-base leading-7 text-[var(--ink-muted)]">
-                â€œ{testimonial.comment}â€
+                “{testimonial.comment}”
               </p>
 
               <div className="border-t border-[rgba(163,184,207,0.10)] pt-4">
@@ -61,5 +61,3 @@ export default function Testimonials() {
     </section>
   );
 }
-
-
