@@ -23,37 +23,43 @@ const icons = {
   target: Target,
 };
 
-// Visual themes for cards
+// Temas con paleta de marca (brand colors)
 const cardThemes = [
   {
-    gradient: 'from-emerald-400 to-teal-600',
-    accent: '#10b981',
-    shadow: 'rgba(16,185,129,0.15)',
+    gradient: 'from-[var(--brand-green)] to-[#1d4a4f]',
+    accent: 'var(--brand-green)',
+    shadow: 'rgba(66,105,109,0.1)',
+    iconBg: 'bg-[rgba(66,105,109,0.08)]',
   },
   {
-    gradient: 'from-blue-400 to-indigo-600',
-    accent: '#3b82f6',
-    shadow: 'rgba(59,130,246,0.15)',
+    gradient: 'from-[var(--brand-blue)] to-[var(--brand-blue-dark)]',
+    accent: 'var(--brand-blue)',
+    shadow: 'rgba(53,78,82,0.1)',
+    iconBg: 'bg-[rgba(53,78,82,0.08)]',
   },
   {
-    gradient: 'from-amber-400 to-orange-600',
-    accent: '#f59e0b',
-    shadow: 'rgba(245,158,11,0.15)',
+    gradient: 'from-[var(--brand-yellow)] to-[#e6a817]',
+    accent: 'var(--brand-yellow)',
+    shadow: 'rgba(247,182,54,0.12)',
+    iconBg: 'bg-[rgba(247,182,54,0.1)]',
   },
   {
-    gradient: 'from-violet-400 to-purple-600',
-    accent: '#8b5cf6',
-    shadow: 'rgba(139,92,246,0.15)',
+    gradient: 'from-[var(--brand-blue-strong)] to-[var(--brand-blue)]',
+    accent: 'var(--brand-blue-strong)',
+    shadow: 'rgba(53,78,82,0.1)',
+    iconBg: 'bg-[rgba(53,78,82,0.08)]',
   },
   {
-    gradient: 'from-rose-400 to-pink-600',
-    accent: '#f43f5e',
-    shadow: 'rgba(244,63,94,0.15)',
+    gradient: 'from-[var(--brand-green)] to-[var(--brand-blue)]',
+    accent: 'var(--brand-green)',
+    shadow: 'rgba(66,105,109,0.08)',
+    iconBg: 'bg-[rgba(66,105,109,0.06)]',
   },
   {
-    gradient: 'from-cyan-400 to-sky-600',
-    accent: '#06b6d4',
-    shadow: 'rgba(6,182,212,0.15)',
+    gradient: 'from-[var(--brand-yellow)] to-[var(--brand-green)]',
+    accent: 'var(--brand-yellow)',
+    shadow: 'rgba(247,182,54,0.1)',
+    iconBg: 'bg-[rgba(247,182,54,0.08)]',
   },
 ];
 
@@ -61,18 +67,14 @@ export default function WhatYouGet() {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
   return (
-    <section className="relative overflow-hidden border-y border-[rgba(53,78,82,0.08)] py-24 md:py-32">
-      {/* Enhanced Background */}
+    <section className="relative overflow-hidden border-y border-[rgba(53,78,82,0.06)] py-24 md:py-32">
+      {/* Fondo suave + grid */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(232,239,238,0.8)] via-white to-white" />
-        
-        {/* Animated background orbs */}
-        <div className="absolute top-0 right-0 h-96 w-96 rounded-full bg-gradient-to-br from-[rgba(53,78,82,0.04)] to-transparent blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-gradient-to-tr from-[rgba(96,125,128,0.05)] to-transparent blur-3xl" />
-        
-        {/* Dot pattern */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div className="h-full w-full bg-[radial-gradient(circle,rgba(53,78,82,1)_1px,transparent_1px)] bg-[size:24px_24px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-[rgba(232,239,238,0.15)] to-white" />
+        <div className="absolute top-0 right-0 h-[30rem] w-[30rem] rounded-full bg-[rgba(53,78,82,0.02)] blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-[24rem] w-[24rem] rounded-full bg-[rgba(96,125,128,0.03)] blur-3xl" />
+        <div className="absolute inset-0 opacity-[0.015]">
+          <div className="h-full w-full bg-[linear-gradient(rgba(53,78,82,1)_1px,transparent_1px),linear-gradient(90deg,rgba(53,78,82,1)_1px,transparent_1px)] bg-[size:72px_72px]" />
         </div>
       </div>
 
@@ -80,18 +82,19 @@ export default function WhatYouGet() {
         <div className="mx-auto max-w-7xl">
           <SectionHeader
             eyebrow={
-              <span className="inline-flex items-center gap-2 rounded-full bg-[rgba(53,78,82,0.06)] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[var(--brand-blue)]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[var(--brand-blue)] backdrop-blur-md shadow-sm">
                 <Sparkles size={14} className="text-[var(--brand-yellow)]" />
                 Qué recibes en ABC del Trading
               </span>
             }
             title={
               <span className="block space-y-2">
-                <span className="block text-4xl md:text-5xl lg:text-6xl font-black text-[var(--ink-main)]">
+                <span className="block text-[clamp(2.5rem,5vw,4rem)] font-black leading-tight text-[var(--ink-main)]">
                   Todo lo que necesitas
                 </span>
-                <span className="block text-3xl md:text-4xl lg:text-5xl font-bold gradient-text">
+                <span className="relative inline-block text-[clamp(2rem,4vw,3.5rem)] font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand-blue)] via-[var(--brand-blue-dark)] to-[var(--brand-green)]">
                   para empezar a operar
+                  <span className="absolute -bottom-1.5 left-0 h-[3px] w-full rounded-full bg-gradient-to-r from-[var(--brand-yellow)]/60 via-[var(--brand-blue)] to-[var(--brand-green)]" />
                 </span>
               </span>
             }
@@ -99,7 +102,7 @@ export default function WhatYouGet() {
             className="mb-16 md:mb-20 text-center"
           />
 
-          {/* Benefits Grid */}
+          {/* Grid de beneficios */}
           <div className="grid gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
             {benefits.map((benefit, index) => {
               const Icon = icons[benefit.icon as keyof typeof icons];
@@ -114,62 +117,59 @@ export default function WhatYouGet() {
                   onMouseLeave={() => setActiveCard(null)}
                 >
                   <div
-                    className={`relative h-full overflow-hidden rounded-2xl border-2 bg-white p-6 sm:p-7 transition-all duration-500 ${
+                    className={`relative h-full overflow-hidden rounded-2xl border bg-white/70 backdrop-blur-md p-6 sm:p-7 transition-all duration-500 ${
                       isActive
                         ? 'border-transparent shadow-2xl -translate-y-1.5'
-                        : 'border-[rgba(53,78,82,0.1)] shadow-lg hover:shadow-xl hover:-translate-y-0.5'
+                        : 'border-white/40 shadow-lg hover:shadow-xl hover:-translate-y-0.5'
                     }`}
                     style={
                       isActive
-                        ? { boxShadow: `0 20px 60px ${theme.shadow}` }
+                        ? { boxShadow: `0 25px 50px -12px ${theme.shadow}` }
                         : undefined
                     }
                   >
-                    {/* Gradient border on hover */}
+                    {/* Relleno de gradiente sutil en hover */}
                     <div
                       className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${theme.gradient} opacity-0 transition-opacity duration-500 -z-10 ${
                         isActive ? 'opacity-[0.03]' : ''
                       }`}
                     />
 
-                    {/* Icon with animated background */}
+                    {/* Icono con fondo animado */}
                     <div className="relative mb-5">
                       <div
                         className={`inline-flex rounded-xl p-3.5 transition-all duration-500 ${
                           isActive
-                            ? 'bg-gradient-to-br text-white shadow-lg scale-110 -rotate-3'
-                            : 'bg-[rgba(53,78,82,0.06)] text-[var(--brand-blue)]'
+                            ? 'text-white shadow-lg scale-110 -rotate-3'
+                            : `${theme.iconBg} text-[var(--brand-blue)]`
                         }`}
                         style={
                           isActive
-                            ? { backgroundImage: `linear-gradient(135deg, ${theme.accent}dd, ${theme.accent})` }
+                            ? { backgroundColor: theme.accent }
                             : undefined
                         }
                       >
                         <Icon size={24} />
                       </div>
-                      
-                      {/* Floating sparkle on hover */}
                       <Sparkles
                         size={16}
-                        className={`absolute -top-1 -right-1 text-yellow-400 transition-all duration-500 ${
+                        className={`absolute -top-1 -right-1 text-[var(--brand-yellow)] transition-all duration-500 ${
                           isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
                         }`}
                       />
                     </div>
 
-                    {/* Content */}
+                    {/* Contenido textual */}
                     <div className="space-y-3">
                       <h3 className="text-lg font-bold text-[var(--ink-main)] transition-colors duration-300 group-hover:text-[var(--brand-blue)]">
                         {benefit.title}
                       </h3>
-                      
-                      <p className="text-sm leading-relaxed text-[var(--ink-soft)]">
+                      <p className="text-sm leading-relaxed text-[var(--ink-soft)]/80">
                         {benefit.description}
                       </p>
                     </div>
 
-                    {/* Hover indicator */}
+                    {/* Indicador de hover "Descubrir más" */}
                     <div
                       className={`mt-5 flex items-center gap-2 text-xs font-semibold text-[var(--brand-blue)] transition-all duration-500 ${
                         isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
@@ -179,14 +179,14 @@ export default function WhatYouGet() {
                       <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                     </div>
 
-                    {/* Corner decoration */}
+                    {/* Brillo decorativo en esquina */}
                     <div
                       className={`absolute -bottom-3 -right-3 h-20 w-20 rounded-full bg-gradient-to-br ${theme.gradient} opacity-0 blur-xl transition-opacity duration-500 ${
                         isActive ? 'opacity-20' : ''
                       }`}
                     />
 
-                    {/* Number indicator */}
+                    {/* Número de fondo */}
                     <div className="absolute top-4 right-4 text-5xl font-black text-[rgba(53,78,82,0.03)] select-none transition-opacity duration-300 group-hover:opacity-0">
                       {String(index + 1).padStart(2, '0')}
                     </div>
@@ -196,9 +196,9 @@ export default function WhatYouGet() {
             })}
           </div>
 
-          {/* Bottom CTA */}
+          {/* CTA inferior con glassmorfismo */}
           <div className="mt-16 text-center">
-            <div className="inline-flex flex-col sm:flex-row items-center gap-4 rounded-2xl border border-[rgba(53,78,82,0.12)] bg-white/80 backdrop-blur-sm p-4 sm:p-6 shadow-lg">
+            <div className="inline-flex flex-col sm:flex-row items-center gap-4 rounded-2xl border border-white/40 bg-white/60 backdrop-blur-md p-4 sm:p-6 shadow-lg">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[var(--brand-yellow)] to-[var(--brand-blue)] text-white">
                   <Zap size={20} />

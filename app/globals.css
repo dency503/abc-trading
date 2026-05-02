@@ -19,8 +19,11 @@
     --brand-blue: #354e52;
     --brand-blue-dark: #263d41;
     --brand-blue-strong: #263d41;
-    --brand-yellow: #607d80;
-    --brand-yellow-strong: #354e52;
+    --brand-tertiary: #d9a21b;
+    --brand-tertiary-soft: #fff3cf;
+    --brand-tertiary-strong: #a86f00;
+    --brand-yellow: var(--brand-tertiary);
+    --brand-yellow-strong: var(--brand-tertiary-strong);
     --brand-green: #42696d;
     --brand-red: #8a5c50;
     --brand-white: #ffffff;
